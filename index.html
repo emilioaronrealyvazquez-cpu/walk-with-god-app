@@ -2,87 +2,10 @@
 <html>
 
 <head>
-<title>Walk With God</title>
-<link rel="stylesheet" href="style.css">
+    <title>Walk With God</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
-    <!-- Artistic painted sky elements -->
-    <div class="cloud-painting cloud-painting1"></div>
-    <div class="cloud-painting cloud-painting2"></div>
-    <div class="cloud-painting cloud-painting3"></div>
-    <div class="cloud-painting cloud-painting4"></div>
-    <div class="sun-glow"></div>
-    <div class="artistic-dots"></div>
-    <div class="warm-light"></div>
-
-    <div class="app-container">
-        <div class="artistic-swirls"></div>
-        <!-- rest of your app content -->
-
-<div class="app-container">
-
-<h1>Walk With God</h1>
-
-<div id="home">
-
-<h2>Welcome</h2>
-
-<p>"Your word is a lamp to my feet and a light to my path." — Psalm 119:105</p>
-
-<button onclick="showAsk()">❓ Ask a Question</button>
-<button onclick="showBible()">🔍 Search the Bible</button>
-<button onclick="showReader()">📖 Read the Bible</button>
-
-</div>
-
-<div id="askSection" style="display:none">
-
-<h2>Ask a Question</h2>
-
-<input id="question" placeholder="Ask something like 'why do I feel jealous?'">
-
-<button onclick="answerQuestion()">Ask</button>
-
-<div id="answerResult"></div>
-
-<button onclick="goHome()">← Back</button>
-
-</div>
-
-<div id="bibleSection" style="display:none">
-
-<h2>Search the Bible</h2>
-
-<input id="bibleSearch" placeholder="Search a word like 'love'">
-
-<button onclick="searchBible()">Search</button>
-
-<div id="bibleResult"></div>
-
-<button onclick="goHome()">← Back</button>
-
-</div>
-
-<div id="readerSection" style="display:none">
-
-<h2>Read the Bible</h2>
-
-<div id="readerContent">
-    <p>Loading books...</p>
-</div>
-
-<button onclick="goHome()" style="margin-top:20px;">← Back</button>
-
-</div>
-
-</div>
-
-<script src="script.js"></script>
-
-</body>
-
-</html>
 <body>
     <!-- Painting background elements - exactly like the image -->
     <div class="painting-cloud cloud-1"></div>
@@ -94,6 +17,48 @@
     <div class="warm-horizon"></div>
 
     <div class="app-container">
-        <!-- Your app content here -->
+        <div class="artistic-swirls"></div>
+        
+        <h1>Walk With God</h1>
+
+        <!-- Home Screen -->
+        <div id="home">
+            <h2>Welcome</h2>
+            <p>"Your word is a lamp to my feet and a light to my path." — Psalm 119:105</p>
+            <button onclick="showAsk()">❓ Ask a Question</button>
+            <button onclick="showBible()">🔍 Search the Bible</button>
+            <button onclick="showReader()">📖 Read the Bible</button>
+        </div>
+
+        <!-- Ask Question Screen -->
+        <div id="askSection" style="display:none">
+            <h2>Ask a Question</h2>
+            <input id="question" placeholder="Ask something like 'why do I feel jealous?'">
+            <button onclick="answerQuestion()">Ask</button>
+            <div id="answerResult"></div>
+            <button onclick="goHome()">← Back</button>
+        </div>
+
+        <!-- Search Bible Screen -->
+        <div id="bibleSection" style="display:none">
+            <h2>Search the Bible</h2>
+            <input id="bibleSearch" placeholder="Search a word like 'love'">
+            <button onclick="searchBible()">Search</button>
+            <div id="bibleResult"></div>
+            <button onclick="goHome()">← Back</button>
+        </div>
+
+        <!-- Read Bible Screen -->
+        <div id="readerSection" style="display:none">
+            <h2>Read the Bible</h2>
+            <div id="readerContent">
+                <p>Loading books...</p>
+            </div>
+            <button onclick="goHome()" style="margin-top:20px;">← Back</button>
+        </div>
     </div>
+
+    <script src="script.js"></script>
 </body>
+
+</html>
