@@ -311,4 +311,19 @@ function loadChapter(book, chapter) {
         .catch(error => {
             document.getElementById("chapter-text").innerHTML = "<p>Error loading chapter. Please try again.</p>";
         });
+// Chapter navigation is already in the loadChapter function:
+output += `<div class="chapter-navigation">`;
+if (chapter > 1) {
+    output += `<button onclick="loadChapter('${book}', ${chapter - 1})">← Previous</button>`;
+} else {
+    output += `<button disabled style="opacity:0.5; cursor:not-allowed;">← Previous</button>`;
 }
+
+output += `<span>${book} ${chapter}</span>`;
+
+if (chapter < maxChapters) {
+    output += `<button onclick="loadChapter('${book}', ${chapter + 1})">Next →</button>`;
+} else {
+    output += `<button disabled style="opacity:0.5; cursor:not-allowed;">Next →</button>`;
+}
+output += `</div>`;
