@@ -133,6 +133,25 @@ const bibleBooks = [
     "1 John", "2 John", "3 John", "Jude", "Revelation"
 ];
 
+// Chapter counts for each book
+const chapterCounts = {
+    "Genesis": 50, "Exodus": 40, "Leviticus": 27, "Numbers": 36, "Deuteronomy": 34,
+    "Joshua": 24, "Judges": 21, "Ruth": 4, "1 Samuel": 31, "2 Samuel": 24,
+    "1 Kings": 22, "2 Kings": 25, "1 Chronicles": 29, "2 Chronicles": 36,
+    "Ezra": 10, "Nehemiah": 13, "Esther": 10, "Job": 42, "Psalm": 150,
+    "Proverbs": 31, "Ecclesiastes": 12, "Song of Solomon": 8, "Isaiah": 66,
+    "Jeremiah": 52, "Lamentations": 5, "Ezekiel": 48, "Daniel": 12,
+    "Hosea": 14, "Joel": 3, "Amos": 9, "Obadiah": 1, "Jonah": 4,
+    "Micah": 7, "Nahum": 3, "Habakkuk": 3, "Zephaniah": 3, "Haggai": 2,
+    "Zechariah": 14, "Malachi": 4, "Matthew": 28, "Mark": 16, "Luke": 24,
+    "John": 21, "Acts": 28, "Romans": 16, "1 Corinthians": 16, "2 Corinthians": 13,
+    "Galatians": 6, "Ephesians": 6, "Philippians": 4, "Colossians": 4,
+    "1 Thessalonians": 5, "2 Thessalonians": 3, "1 Timothy": 6, "2 Timothy": 4,
+    "Titus": 3, "Philemon": 1, "Hebrews": 13, "James": 5, "1 Peter": 5,
+    "2 Peter": 3, "1 John": 5, "2 John": 1, "3 John": 1, "Jude": 1,
+    "Revelation": 22
+};
+
 function loadBooks() {
     let output = "<h3>Select a Book:</h3><div style='display:grid; grid-template-columns:repeat(auto-fill, minmax(120px,1fr)); gap:10px;'>";
     
@@ -145,17 +164,9 @@ function loadBooks() {
 }
 
 function loadChapters(book) {
-    // For now, we'll show chapters 1-50 (most books have less than 50)
+    let maxChapters = chapterCounts[book] || 50;
     let output = `<button onclick="loadBooks()" style="margin-bottom:15px;">← Back to Books</button>`;
     output += `<h3>${book} - Select Chapter:</h3><div style='display:grid; grid-template-columns:repeat(auto-fill, minmax(70px,1fr)); gap:5px;'>`;
-    
-    // Different books have different numbers of chapters
-    let maxChapters = 50; // Default
-    if (book === "Psalm") maxChapters = 150;
-    if (book === "Genesis") maxChapters = 50;
-    if (book === "Exodus") maxChapters = 40;
-    if (book === "Isaiah") maxChapters = 66;
-    if (book === "Matthew" || book === "Acts") maxChapters = 28;
     
     for (let i = 1; i <= maxChapters; i++) {
         output += `<button onclick="loadChapter('${book}', ${i})" style="margin:2px; padding:5px;">${i}</button>`;
@@ -166,82 +177,63 @@ function loadChapters(book) {
 }
 
 function loadChapter(book, chapter) {
-    // Sample verses for demonstration
-    // In a real app, you'd load this from a JSON file
     let output = `<button onclick="loadChapters('${book}')" style="margin-bottom:15px;">← Back to Chapters</button>`;
-    output += `<h3>${book} ${chapter}</h3><div style='text-align:left;'>`;
-    
-    // Add sample verses (in reality, you'd have all verses here)
-    if (book === "Psalm" && chapter === 23) {
-        output += `
-            <p><strong>1</strong> The Lord is my shepherd; I shall not want.</p>
-            <p><strong>2</strong> He maketh me to lie down in green pastures: he leadeth me beside the still waters.</p>
-            <p><strong>3</strong> He restoreth my soul: he leadeth me in the paths of righteousness for his name's sake.</p>
-            <p><strong>4</strong> Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me; thy rod and thy staff they comfort me.</p>
-            <p><strong>5</strong> Thou preparest a table before me in the presence of mine enemies: thou anointest my head with oil; my cup runneth over.</p>
-            <p><strong>6</strong> Surely goodness and mercy shall follow me all the days of my life: and I will dwell in the house of the Lord for ever.</p>
-        `;
-    } else if (book === "John" && chapter === 3) {
-        output += `
-            <p><strong>16</strong> For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.</p>
-            <p><strong>17</strong> For God sent not his Son into the world to condemn the world; but that the world through him might be saved.</p>
-        `;
-    } else {
-        output += `<p><em>Sample verses for ${book} ${chapter}. In the full version, all verses would appear here.</em></p>`;
-        // Add a few sample verses
-        for (let i = 1; i <= 3; i++) {
-            output += `<p><strong>${i}</strong> Sample verse text for ${book} ${chapter}:${i}...</p>`;
-        }
-    }
-    
+    output += `<h3>${book} ${chapter}</h3><div style='text-align:left;' id="chapter-text">`;
+    output += `<p><em>Loading ${book} ${chapter}...</em></p>`;
     output += "</div>";
     document.getElementById("readerContent").innerHTML = output;
+    
+    // Use a free Bible API to get the actual verses
+    fetch(`https://bible-api.com/${book}+${chapter}?translation=kjv`)
+        .then(response => response.json())
+        .then(data => {
+            let versesOutput = "";
+            if (data.verses) {
+                data.verses.forEach(verse => {
+                    versesOutput += `<p><strong>${verse.verse}</strong> ${verse.text}</p>`;
+                });
+            } else {
+                versesOutput = "<p>Could not load verses. Please try again later.</p>";
+            }
+            document.getElementById("chapter-text").innerHTML = versesOutput;
+        })
+        .catch(error => {
+            document.getElementById("chapter-text").innerHTML = "<p>Error loading chapter. Please try again.</p>";
+        });
 }
 
-// Search Bible function (expanded)
-const bible = [
-    {book: "Genesis", chapter: 1, verse: 1, text: "In the beginning God created the heaven and the earth."},
-    {book: "Genesis", chapter: 1, verse: 27, text: "So God created man in his own image, in the image of God created he him; male and female created he them."},
-    {book: "Exodus", chapter: 20, verse: 12, text: "Honour thy father and thy mother: that thy days may be long upon the land which the Lord thy God giveth thee."},
-    {book: "Psalm", chapter: 23, verse: 1, text: "The Lord is my shepherd; I shall not want."},
-    {book: "Psalm", chapter: 23, verse: 4, text: "Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me; thy rod and thy staff they comfort me."},
-    {book: "Proverbs", chapter: 3, verse: 5, text: "Trust in the Lord with all thine heart; and lean not unto thine own understanding."},
-    {book: "Proverbs", chapter: 3, verse: 6, text: "In all thy ways acknowledge him, and he shall direct thy paths."},
-    {book: "Isaiah", chapter: 40, verse: 31, text: "But they that wait upon the Lord shall renew their strength; they shall mount up with wings as eagles; they shall run, and not be weary; and they shall walk, and not faint."},
-    {book: "Matthew", chapter: 5, verse: 14, text: "Ye are the light of the world. A city that is set on an hill cannot be hid."},
-    {book: "Matthew", chapter: 11, verse: 28, text: "Come unto me, all ye that labour and are heavy laden, and I will give you rest."},
-    {book: "John", chapter: 3, verse: 16, text: "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life."},
-    {book: "John", chapter: 14, verse: 6, text: "Jesus saith unto him, I am the way, the truth, and the life: no man cometh unto the Father, but by me."},
-    {book: "Romans", chapter: 8, verse: 28, text: "And we know that all things work together for good to them that love God, to them who are the called according to his purpose."},
-    {book: "Romans", chapter: 12, verse: 2, text: "And be not conformed to this world: but be ye transformed by the renewing of your mind, that ye may prove what is that good, and acceptable, and perfect, will of God."},
-    {book: "Philippians", chapter: 4, verse: 13, text: "I can do all things through Christ which strengtheneth me."},
-    {book: "Philippians", chapter: 4, verse: 6, text: "Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God."},
-    {book: "1 John", chapter: 4, verse: 8, text: "He that loveth not knoweth not God; for God is love."}
-];
-
+// Search Bible function using API
 function searchBible() {
     let word = document.getElementById("bibleSearch").value.toLowerCase();
     let resultDiv = document.getElementById("bibleResult");
-    let output = "";
-    let count = 0;
     
-    for (let v of bible) {
-        if (v.text.toLowerCase().includes(word) || v.book.toLowerCase().includes(word)) {
-            output += `
-            <div style="background:#f9f9f9; padding:10px; margin-bottom:10px; border-radius:5px;">
-                <p><strong>${v.book} ${v.chapter}:${v.verse}</strong><br>
-                ${v.text}</p>
-            </div>
-            `;
-            count++;
-        }
-    }
+    resultDiv.innerHTML = "<p><em>Searching...</em></p>";
     
-    if (count === 0) {
-        output = "<p>No verses found. Try a different word like 'love', 'faith', or 'pray'.</p>";
-    } else {
-        output = `<p>Found ${count} verses:</p>` + output;
-    }
-    
-    resultDiv.innerHTML = output;
+    // Use Bible API for search (this searches the whole KJV Bible)
+    fetch(`https://bible-api.com/${encodeURIComponent(word)}?translation=kjv`)
+        .then(response => response.json())
+        .then(data => {
+            let output = "";
+            let count = 0;
+            
+            if (data.verses && data.verses.length > 0) {
+                data.verses.forEach(verse => {
+                    output += `
+                    <div style="background:#f9f9f9; padding:10px; margin-bottom:10px; border-radius:5px;">
+                        <p><strong>${verse.book} ${verse.chapter}:${verse.verse}</strong><br>
+                        ${verse.text}</p>
+                    </div>
+                    `;
+                    count++;
+                });
+                output = `<p>Found ${count} verses:</p>` + output;
+            } else {
+                output = "<p>No verses found. Try a different word like 'love', 'faith', or 'pray'.</p>";
+            }
+            
+            resultDiv.innerHTML = output;
+        })
+        .catch(error => {
+            resultDiv.innerHTML = "<p>Error searching. Please try again.</p>";
+        });
 }
