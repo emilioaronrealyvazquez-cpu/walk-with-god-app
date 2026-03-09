@@ -189,6 +189,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            cursor: pointer;
         }
 
         .avatar {
@@ -226,6 +227,15 @@
             padding: 20px;
             overflow-y: auto;
             max-height: calc(100vh - 180px);
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
         }
 
         /* Cards */
@@ -398,6 +408,10 @@
             border-radius: 30px;
             transition: all 0.2s;
             opacity: 0.8;
+            color: white;
+            text-decoration: none;
+            border: none;
+            background: transparent;
         }
 
         .nav-item i {
@@ -686,6 +700,7 @@
             letter-spacing: 2px;
             margin-bottom: 15px;
             opacity: 0.9;
+            color: white;
         }
 
         .verse-card p {
@@ -693,11 +708,13 @@
             font-style: italic;
             margin-bottom: 15px;
             line-height: 1.4;
+            color: white;
         }
 
         .verse-card .ref {
             font-size: 16px;
             opacity: 0.9;
+            color: white;
         }
 
         /* Bookmarks */
@@ -1222,24 +1239,24 @@
             </div>
         </div>
 
-        <!-- Bottom Navigation -->
+        <!-- Bottom Navigation - FIXED with working buttons -->
         <div class="bottom-nav">
-            <div class="nav-item active" onclick="showHome()">
+            <button class="nav-item active" onclick="showHome()">
                 <i>🏠</i>
                 <span>Home</span>
-            </div>
-            <div class="nav-item" onclick="showReader()">
+            </button>
+            <button class="nav-item" onclick="showReader()">
                 <i>📖</i>
                 <span>Read</span>
-            </div>
-            <div class="nav-item" onclick="showAsk()">
+            </button>
+            <button class="nav-item" onclick="showAsk()">
                 <i>❓</i>
                 <span>Ask</span>
-            </div>
-            <div class="nav-item" onclick="showBible()">
+            </button>
+            <button class="nav-item" onclick="showBible()">
                 <i>🔍</i>
                 <span>Search</span>
-            </div>
+            </button>
         </div>
     </div>
 
@@ -1384,7 +1401,7 @@
         function updateUIForGuest() {
             document.getElementById('userName').textContent = 'Guest';
             document.getElementById('profileName').textContent = 'Guest User';
-            document.getElementById('profileEmail').textcontent = 'guest@example.com';
+            document.getElementById('profileEmail').textContent = 'guest@example.com';
             
             document.getElementById('profileStreak').textContent = '0';
             document.getElementById('profileChapters').textContent = '0';
@@ -1400,136 +1417,53 @@
             showToast('Password reset link sent to your email');
         }
 
-        // ==================== BOOKMARKS ====================
-        function addBookmark() {
-            if (!currentUser) {
-                showLogin();
-                return;
-            }
+        // ==================== NAVIGATION FUNCTIONS ====================
+        function showHome() {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            // Show home section
+            document.getElementById('homeSection').classList.add('active');
             
-            if (!currentBook || !currentChapter) {
-                showToast('Please select a chapter first');
-                return;
-            }
+            // Update bottom nav active state
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            document.querySelectorAll('.nav-item')[0].classList.add('active');
             
-            const bookmark = {
-                id: Date.now(),
-                book: currentBook,
-                chapter: currentChapter,
-                verse: currentDisplayBook,
-                date: new Date().toISOString()
-            };
-            
-            if (!currentUser.bookmarks) currentUser.bookmarks = [];
-            currentUser.bookmarks.push(bookmark);
-            
-            saveUserData();
-            showToast('Bookmark added!');
+            updateVerseOfDay();
         }
 
-        function loadBookmarks() {
-            if (!currentUser || !currentUser.bookmarks) return;
+        function showReader() {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            // Show reader section
+            document.getElementById('readerSection').classList.add('active');
             
-            const list = document.getElementById('bookmarksList');
-            let html = '';
+            // Update bottom nav active state
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            document.querySelectorAll('.nav-item')[1].classList.add('active');
             
-            currentUser.bookmarks.forEach(bookmark => {
-                html += `
-                <div class="bookmark-item" onclick="loadChapter('${bookmark.book}', ${bookmark.chapter}, '${bookmark.verse}'); closeModal('bookmarksModal')">
-                    <div class="bookmark-info">
-                        <h4>${bookmark.verse} ${bookmark.chapter}</h4>
-                        <p>${new Date(bookmark.date).toLocaleDateString()}</p>
-                    </div>
-                    <button class="bookmark-delete" onclick="deleteBookmark(${bookmark.id}); event.stopPropagation()">🗑️</button>
-                </div>
-                `;
-            });
-            
-            if (html === '') {
-                html = '<p style="text-align:center;">No bookmarks yet</p>';
-            }
-            
-            list.innerHTML = html;
+            loadBooks();
         }
 
-        function deleteBookmark(id) {
-            if (!currentUser) return;
-            currentUser.bookmarks = currentUser.bookmarks.filter(b => b.id !== id);
-            saveUserData();
-            loadBookmarks();
-            showToast('Bookmark removed');
+        function showAsk() {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            // Show ask section
+            document.getElementById('askSection').classList.add('active');
+            
+            // Update bottom nav active state
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            document.querySelectorAll('.nav-item')[2].classList.add('active');
         }
 
-        // ==================== NOTES ====================
-        function loadNotes() {
-            if (!currentUser || !currentUser.notes) return;
+        function showBible() {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            // Show search section
+            document.getElementById('bibleSection').classList.add('active');
             
-            const list = document.getElementById('notesList');
-            let html = '';
-            
-            currentUser.notes.forEach(note => {
-                html += `
-                <div class="note-item">
-                    <div class="note-header">
-                        <span class="note-date">${new Date(note.date).toLocaleDateString()}</span>
-                        <button class="note-delete" onclick="deleteNote(${note.id})">🗑️</button>
-                    </div>
-                    <p>${note.text}</p>
-                </div>
-                `;
-            });
-            
-            if (html === '') {
-                html = '<p style="text-align:center;">No notes yet</p>';
-            }
-            
-            list.innerHTML = html;
-        }
-
-        function addNote() {
-            if (!currentUser) {
-                showLogin();
-                return;
-            }
-            
-            const text = document.getElementById('noteInput').value.trim();
-            if (!text) return;
-            
-            if (!currentUser.notes) currentUser.notes = [];
-            
-            currentUser.notes.unshift({
-                id: Date.now(),
-                text,
-                date: new Date().toISOString()
-            });
-            
-            document.getElementById('noteInput').value = '';
-            saveUserData();
-            loadNotes();
-            showToast('Note added');
-        }
-
-        function deleteNote(id) {
-            if (!currentUser) return;
-            currentUser.notes = currentUser.notes.filter(n => n.id !== id);
-            saveUserData();
-            loadNotes();
-            showToast('Note deleted');
-        }
-
-        function saveUserData() {
-            if (!currentUser) return;
-            
-            // Update users array
-            const index = users.findIndex(u => u.id === currentUser.id);
-            if (index !== -1) {
-                users[index] = currentUser;
-            }
-            
-            localStorage.setItem('users', JSON.stringify(users));
-            localStorage.setItem('currentSession', JSON.stringify(currentUser));
-            
-            updateUIForUser();
+            // Update bottom nav active state
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            document.querySelectorAll('.nav-item')[3].classList.add('active');
         }
 
         // ==================== COMPLETE BIBLE DATA ====================
@@ -1610,38 +1544,7 @@
         let currentChapter = 1;
         let currentDisplayBook = null;
 
-        // ==================== NAVIGATION ====================
-        function showHome() {
-            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
-            document.getElementById('homeSection').classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-            document.querySelectorAll('.nav-item')[0].classList.add('active');
-            updateVerseOfDay();
-        }
-
-        function showReader() {
-            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
-            document.getElementById('readerSection').classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-            document.querySelectorAll('.nav-item')[1].classList.add('active');
-            loadBooks();
-        }
-
-        function showAsk() {
-            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
-            document.getElementById('askSection').classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-            document.querySelectorAll('.nav-item')[2].classList.add('active');
-        }
-
-        function showBible() {
-            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
-            document.getElementById('bibleSection').classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-            document.querySelectorAll('.nav-item')[3].classList.add('active');
-        }
-
-        // ==================== BIBLE READING ====================
+        // ==================== BIBLE READING FUNCTIONS ====================
         function loadBooks() {
             let output = '<h3>Select a Book:</h3>';
             output += '<div class="book-grid">';
@@ -1804,6 +1707,138 @@
             document.getElementById('answerResult').innerHTML = output;
         }
 
+        // ==================== BOOKMARKS ====================
+        function addBookmark() {
+            if (!currentUser) {
+                showLogin();
+                return;
+            }
+            
+            if (!currentBook || !currentChapter) {
+                showToast('Please select a chapter first');
+                return;
+            }
+            
+            const bookmark = {
+                id: Date.now(),
+                book: currentBook,
+                chapter: currentChapter,
+                verse: currentDisplayBook,
+                date: new Date().toISOString()
+            };
+            
+            if (!currentUser.bookmarks) currentUser.bookmarks = [];
+            currentUser.bookmarks.push(bookmark);
+            
+            saveUserData();
+            showToast('Bookmark added!');
+        }
+
+        function loadBookmarks() {
+            if (!currentUser || !currentUser.bookmarks) return;
+            
+            const list = document.getElementById('bookmarksList');
+            let html = '';
+            
+            currentUser.bookmarks.forEach(bookmark => {
+                html += `
+                <div class="bookmark-item" onclick="loadChapter('${bookmark.book}', ${bookmark.chapter}, '${bookmark.verse}'); closeModal('bookmarksModal')">
+                    <div class="bookmark-info">
+                        <h4>${bookmark.verse} ${bookmark.chapter}</h4>
+                        <p>${new Date(bookmark.date).toLocaleDateString()}</p>
+                    </div>
+                    <button class="bookmark-delete" onclick="deleteBookmark(${bookmark.id}); event.stopPropagation()">🗑️</button>
+                </div>
+                `;
+            });
+            
+            if (html === '') {
+                html = '<p style="text-align:center;">No bookmarks yet</p>';
+            }
+            
+            list.innerHTML = html;
+        }
+
+        function deleteBookmark(id) {
+            if (!currentUser) return;
+            currentUser.bookmarks = currentUser.bookmarks.filter(b => b.id !== id);
+            saveUserData();
+            loadBookmarks();
+            showToast('Bookmark removed');
+        }
+
+        // ==================== NOTES ====================
+        function loadNotes() {
+            if (!currentUser || !currentUser.notes) return;
+            
+            const list = document.getElementById('notesList');
+            let html = '';
+            
+            currentUser.notes.forEach(note => {
+                html += `
+                <div class="note-item">
+                    <div class="note-header">
+                        <span class="note-date">${new Date(note.date).toLocaleDateString()}</span>
+                        <button class="note-delete" onclick="deleteNote(${note.id})">🗑️</button>
+                    </div>
+                    <p>${note.text}</p>
+                </div>
+                `;
+            });
+            
+            if (html === '') {
+                html = '<p style="text-align:center;">No notes yet</p>';
+            }
+            
+            list.innerHTML = html;
+        }
+
+        function addNote() {
+            if (!currentUser) {
+                showLogin();
+                return;
+            }
+            
+            const text = document.getElementById('noteInput').value.trim();
+            if (!text) return;
+            
+            if (!currentUser.notes) currentUser.notes = [];
+            
+            currentUser.notes.unshift({
+                id: Date.now(),
+                text,
+                date: new Date().toISOString()
+            });
+            
+            document.getElementById('noteInput').value = '';
+            saveUserData();
+            loadNotes();
+            showToast('Note added');
+        }
+
+        function deleteNote(id) {
+            if (!currentUser) return;
+            currentUser.notes = currentUser.notes.filter(n => n.id !== id);
+            saveUserData();
+            loadNotes();
+            showToast('Note deleted');
+        }
+
+        function saveUserData() {
+            if (!currentUser) return;
+            
+            // Update users array
+            const index = users.findIndex(u => u.id === currentUser.id);
+            if (index !== -1) {
+                users[index] = currentUser;
+            }
+            
+            localStorage.setItem('users', JSON.stringify(users));
+            localStorage.setItem('currentSession', JSON.stringify(currentUser));
+            
+            updateUIForUser();
+        }
+
         // ==================== VERSE OF THE DAY ====================
         const verses = [
             { text: "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.", ref: "John 3:16" },
@@ -1949,6 +1984,35 @@
             btn.textContent = `Verse #: ${current ? 'Off' : 'On'}`;
         }
 
+        function toggleJustify() {
+            const btn = document.getElementById('textJustify');
+            const current = btn.textContent.includes('Off');
+            document.body.style.textAlign = current ? 'justify' : 'left';
+            btn.textContent = `Justify: ${current ? 'On' : 'Off'}`;
+        }
+
+        function setTranslation(trans) {
+            showToast(`Translation set to ${trans.toUpperCase()}`);
+        }
+
+        function toggleDailyVerse() {
+            const btn = document.getElementById('dailyVerseNotif');
+            const current = btn.textContent.includes('On');
+            btn.textContent = `Daily Verse: ${current ? 'Off' : 'On'}`;
+        }
+
+        function toggleReminders() {
+            const btn = document.getElementById('reminders');
+            const current = btn.textContent.includes('On');
+            btn.textContent = `Reminders: ${current ? 'Off' : 'On'}`;
+        }
+
+        function toggleSound() {
+            const btn = document.getElementById('sound');
+            const current = btn.textContent.includes('On');
+            btn.textContent = `Sound: ${current ? 'Off' : 'On'}`;
+        }
+
         function exportData() {
             if (!currentUser) {
                 showLogin();
@@ -2005,6 +2069,10 @@
             input.click();
         }
 
+        function backupData() {
+            exportData();
+        }
+
         function clearData() {
             if (confirm('Are you sure? This will delete all your data.')) {
                 if (currentUser) {
@@ -2024,10 +2092,6 @@
             setFont('inter');
             setFontSize('medium');
             showToast('Settings reset');
-        }
-
-        function backupData() {
-            exportData();
         }
 
         function showPrivacyPolicy() {
