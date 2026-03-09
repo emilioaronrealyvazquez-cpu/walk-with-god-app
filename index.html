@@ -19,18 +19,127 @@
             align-items: center;
             position: relative;
             overflow-x: hidden;
-            /* More realistic parchment/aged paper background */
+            /* Default background - will be overridden by settings */
             background: #d9c8a9;
             background-image: 
                 radial-gradient(circle at 30% 40%, rgba(139, 107, 79, 0.08) 1px, transparent 1px),
                 radial-gradient(circle at 70% 60%, rgba(139, 107, 79, 0.08) 1px, transparent 1px),
-                radial-gradient(circle at 45% 80%, rgba(100, 70, 40, 0.05) 2px, transparent 2px),
-                linear-gradient(90deg, rgba(139, 107, 79, 0.03) 1px, transparent 1px),
-                linear-gradient(0deg, rgba(139, 107, 79, 0.03) 1px, transparent 1px);
-            background-size: 60px 60px, 80px 80px, 100px 100px, 40px 40px, 40px 40px;
+                linear-gradient(90deg, rgba(139, 107, 79, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px, 80px 80px, 40px 40px;
+            transition: background 0.3s, background-image 0.3s;
         }
 
-        /* Subtle cross background - much more realistic and faint */
+        /* Dark mode theme */
+        body.dark-mode {
+            background: #2c231c;
+            background-image: 
+                radial-gradient(circle at 30% 40%, rgba(200, 170, 140, 0.1) 1px, transparent 1px),
+                radial-gradient(circle at 70% 60%, rgba(200, 170, 140, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(200, 170, 140, 0.05) 1px, transparent 1px);
+        }
+
+        body.dark-mode .app-container {
+            background: #3a2e25;
+            color: #e8d5b5;
+            border-left-color: #b5977a;
+        }
+
+        body.dark-mode h1, 
+        body.dark-mode h2, 
+        body.dark-mode h3,
+        body.dark-mode p,
+        body.dark-mode span,
+        body.dark-mode button,
+        body.dark-mode input,
+        body.dark-mode #answerResult,
+        body.dark-mode #bibleResult,
+        body.dark-mode #readerContent,
+        body.dark-mode #chapter-text {
+            color: #e8d5b5;
+        }
+
+        body.dark-mode button {
+            background: #4a3b2f;
+            border-color: #b5977a;
+        }
+
+        body.dark-mode input {
+            background: #4a3b2f;
+            color: #e8d5b5;
+        }
+
+        /* High contrast theme */
+        body.high-contrast {
+            background: #000000;
+            background-image: none;
+        }
+
+        body.high-contrast .app-container {
+            background: #000000;
+            border: 4px solid #ffffff;
+            color: #ffffff;
+        }
+
+        body.high-contrast h1, 
+        body.high-contrast h2, 
+        body.high-contrast h3,
+        body.high-contrast p,
+        body.high-contrast span,
+        body.high-contrast button,
+        body.high-contrast input,
+        body.high-contrast #answerResult,
+        body.high-contrast #bibleResult,
+        body.high-contrast #readerContent,
+        body.high-contrast #chapter-text {
+            color: #ffffff;
+        }
+
+        body.high-contrast button {
+            background: #ffffff;
+            color: #000000;
+            border: 3px solid #ffffff;
+        }
+
+        /* Sepia theme */
+        body.sepia-mode {
+            background: #704214;
+            background-image: 
+                radial-gradient(circle at 30% 40%, rgba(210, 180, 140, 0.15) 1px, transparent 1px);
+        }
+
+        body.sepia-mode .app-container {
+            background: #d2b48c;
+        }
+
+        /* Font size classes */
+        body.font-small {
+            font-size: 16px;
+        }
+        body.font-small button,
+        body.font-small input,
+        body.font-small #chapter-text {
+            font-size: 18px;
+        }
+
+        body.font-medium {
+            font-size: 20px;
+        }
+        body.font-medium button,
+        body.font-medium input,
+        body.font-medium #chapter-text {
+            font-size: 22px;
+        }
+
+        body.font-large {
+            font-size: 24px;
+        }
+        body.font-large button,
+        body.font-large input,
+        body.font-large #chapter-text {
+            font-size: 26px;
+        }
+
+        /* Subtle cross background */
         body::before {
             content: '';
             position: fixed;
@@ -39,40 +148,148 @@
             right: 0;
             bottom: 0;
             background-image: 
-                /* Main cross - very faint */
                 linear-gradient(90deg, transparent 49.8%, rgba(92, 62, 45, 0.15) 49.8%, rgba(92, 62, 45, 0.15) 50.2%, transparent 50.2%),
-                linear-gradient(180deg, transparent 49.8%, rgba(92, 62, 45, 0.15) 49.8%, rgba(92, 62, 45, 0.15) 50.2%, transparent 50.2%),
-                
-                /* Subtle vine details - very light */
-                repeating-linear-gradient(45deg, 
-                    transparent 0px,
-                    transparent 20px,
-                    rgba(74, 107, 63, 0.1) 20px,
-                    rgba(74, 107, 63, 0.1) 21px,
-                    transparent 21px,
-                    transparent 40px),
-                
-                /* Faint leaves */
-                radial-gradient(circle at 25% 35%, rgba(90, 124, 74, 0.08) 2px, transparent 2px),
-                radial-gradient(circle at 75% 65%, rgba(90, 124, 74, 0.08) 2px, transparent 2px);
-            
-            background-size: 
-                100% 100%, 100% 100%,
-                60px 60px,
-                30px 30px, 30px 30px;
-            
-            background-position: center;
-            background-repeat: repeat;
+                linear-gradient(180deg, transparent 49.8%, rgba(92, 62, 45, 0.15) 49.8%, rgba(92, 62, 45, 0.15) 50.2%, transparent 50.2%);
+            background-size: 100% 100%, 100% 100%;
             opacity: 0.6;
             pointer-events: none;
             z-index: 0;
+        }
+
+        /* Settings panel */
+        .settings-panel {
+            position: fixed;
+            top: 0;
+            right: -350px;
+            width: 350px;
+            height: 100vh;
+            background: #f5ebdc;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.3);
+            z-index: 100;
+            transition: right 0.3s ease;
+            padding: 80px 20px 20px;
+            overflow-y: auto;
+            border-left: 4px solid #5c3e2d;
+        }
+
+        body.dark-mode .settings-panel {
+            background: #3a2e25;
+            color: #e8d5b5;
+        }
+
+        body.high-contrast .settings-panel {
+            background: #000000;
+            border: 4px solid #ffffff;
+            color: #ffffff;
+        }
+
+        .settings-panel.open {
+            right: 0;
+        }
+
+        .settings-toggle {
+            position: fixed;
+            top: 20px;
+            right: 90px;
+            z-index: 101;
+            cursor: pointer;
+            background: #8b6b4f;
+            color: #f5ebdc;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 25px;
+            font-size: 18px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+
+        .settings-toggle:hover {
+            background: #5c3e2d;
+            transform: translateY(-2px);
+        }
+
+        .close-settings {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 30px;
+            cursor: pointer;
+            color: #5c3e2d;
+        }
+
+        .settings-section {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #b5977a;
+        }
+
+        .settings-section h3 {
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .settings-option {
+            margin-bottom: 15px;
+        }
+
+        .settings-option label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 18px;
+        }
+
+        .settings-option select,
+        .settings-option input[type="range"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #b5977a;
+            border-radius: 4px;
+            background: #fff9f0;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+        }
+
+        .settings-option input[type="color"] {
+            width: 100%;
+            height: 40px;
+            border: 1px solid #b5977a;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .theme-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .theme-btn {
+            padding: 10px;
+            border: 2px solid #b5977a;
+            border-radius: 4px;
+            background: #fff9f0;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 16px;
+        }
+
+        .theme-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+        }
+
+        .theme-btn.active {
+            border-color: #5c3e2d;
+            background: #e8d5b5;
         }
 
         /* Language toggle button */
         .lang-toggle {
             position: absolute;
             top: 20px;
-            right: 30px;
+            right: 150px;
             z-index: 30;
         }
 
@@ -88,16 +305,14 @@
             letter-spacing: 1px;
             transition: all 0.3s;
             box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-            opacity: 0.9;
         }
 
         .lang-toggle button:hover {
             background: #5c3e2d;
             transform: translateY(-2px);
-            box-shadow: 0 5px 12px rgba(0,0,0,0.3);
         }
 
-        /* Main app container - realistic aged book */
+        /* Main app container */
         .app-container {
             max-width: 1000px;
             width: 100%;
@@ -105,55 +320,20 @@
             background: #f5ebdc;
             background-image: 
                 linear-gradient(90deg, rgba(139, 107, 79, 0.05) 1px, transparent 1px),
-                linear-gradient(0deg, rgba(139, 107, 79, 0.05) 1px, transparent 1px),
-                radial-gradient(circle at 20% 30%, rgba(139, 107, 79, 0.03) 2px, transparent 2px);
-            background-size: 50px 50px, 50px 50px, 80px 80px;
+                linear-gradient(0deg, rgba(139, 107, 79, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px, 50px 50px;
             border-radius: 12px 20px 20px 12px;
             padding: 35px 40px 35px 45px;
             box-shadow: 
                 0 20px 40px rgba(0, 0, 0, 0.3),
-                0 5px 15px rgba(0, 0, 0, 0.2),
-                inset 0 0 0 1px #b5977a,
-                inset 0 0 30px rgba(139, 107, 79, 0.2);
+                inset 0 0 0 1px #b5977a;
             position: relative;
             z-index: 10;
             border-left: 4px solid #5c3e2d;
+            transition: background 0.3s, color 0.3s;
         }
 
-        /* Book binding effect - more realistic */
-        .app-container::before {
-            content: '';
-            position: absolute;
-            top: 10px;
-            left: 0;
-            width: 8px;
-            height: calc(100% - 20px);
-            background: linear-gradient(90deg, #5c3e2d, #8b6b4f);
-            border-radius: 4px 0 0 4px;
-            box-shadow: inset -1px 0 3px rgba(0,0,0,0.3);
-            opacity: 0.8;
-        }
-
-        /* Page edge effect */
-        .app-container::after {
-            content: '';
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            bottom: 5px;
-            width: 20px;
-            background: linear-gradient(90deg, transparent, rgba(139, 107, 79, 0.1));
-            pointer-events: none;
-            border-radius: 0 12px 12px 0;
-        }
-
-        /* Subtle leather texture */
-        .app-container {
-            background: #f2e5d2;
-            background-image: 
-                repeating-linear-gradient(45deg, rgba(139, 107, 79, 0.02) 0px, rgba(139, 107, 79, 0.02) 2px, transparent 2px, transparent 6px);
-        }
-
+        /* Rest of your existing styles... */
         h1 {
             text-align: center;
             color: #4a3729;
@@ -181,23 +361,13 @@
             font-weight: 300;
         }
 
-        /* Page turning animation - more subtle */
+        /* Page turn animation */
         .page-turn {
             animation: pageFlip 0.5s ease-in-out;
         }
 
         @keyframes pageFlip {
-            0% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.7;
-                transform: scale(0.99);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
+            50% { opacity: 0.7; transform: scale(0.99); }
         }
 
         h2 {
@@ -284,7 +454,7 @@
             transform: rotate(180deg);
         }
 
-        /* Buttons - more vintage */
+        /* Buttons */
         button {
             padding: 12px 30px;
             margin: 8px;
@@ -299,8 +469,6 @@
             font-family: 'Cormorant Garamond', 'Georgia', serif;
             letter-spacing: 1px;
             box-shadow: 0 3px 6px rgba(100, 70, 40, 0.15);
-            position: relative;
-            overflow: hidden;
         }
 
         button:hover {
@@ -335,7 +503,7 @@
             display: inline;
         }
 
-        /* Input fields - vintage paper */
+        /* Input fields */
         input {
             padding: 15px 25px;
             width: 100%;
@@ -358,14 +526,7 @@
             background: #ffffff;
         }
 
-        input::placeholder {
-            color: #b5977a;
-            font-style: italic;
-            opacity: 0.8;
-            font-size: 18px;
-        }
-
-        /* Result containers - aged paper, VERTICAL SCROLLING */
+        /* Result containers */
         #answerResult, #bibleResult, #readerContent {
             margin-top: 25px;
             padding: 30px;
@@ -383,45 +544,12 @@
             font-size: 20px;
             line-height: 1.7;
             color: #4a3729;
-            position: relative;
             min-height: 300px;
             max-height: 600px;
-            overflow-y: auto;  /* VERTICAL SCROLLING ONLY */
-            overflow-x: hidden; /* NO horizontal scrolling */
+            overflow-y: auto;
+            overflow-x: hidden;
             width: 100%;
-        }
-
-        /* Custom scrollbar for vertical scrolling */
-        #answerResult::-webkit-scrollbar,
-        #bibleResult::-webkit-scrollbar,
-        #readerContent::-webkit-scrollbar,
-        #chapter-text::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        #answerResult::-webkit-scrollbar-track,
-        #bibleResult::-webkit-scrollbar-track,
-        #readerContent::-webkit-scrollbar-track,
-        #chapter-text::-webkit-scrollbar-track {
-            background: #e8d5b5;
-            border-radius: 5px;
-            border: 1px solid #b5977a;
-        }
-
-        #answerResult::-webkit-scrollbar-thumb,
-        #bibleResult::-webkit-scrollbar-thumb,
-        #readerContent::-webkit-scrollbar-thumb,
-        #chapter-text::-webkit-scrollbar-thumb {
-            background: #8b6b4f;
-            border-radius: 5px;
-            border: 2px solid #e8d5b5;
-        }
-
-        #answerResult::-webkit-scrollbar-thumb:hover,
-        #bibleResult::-webkit-scrollbar-thumb:hover,
-        #readerContent::-webkit-scrollbar-thumb:hover,
-        #chapter-text::-webkit-scrollbar-thumb:hover {
-            background: #5c3e2d;
+            transition: background 0.3s, color 0.3s;
         }
 
         /* Chapter navigation */
@@ -435,7 +563,6 @@
             background: #e8d5b5;
             border-radius: 6px;
             border: 1px solid #b5977a;
-            box-shadow: inset 0 1px 4px rgba(100, 70, 40, 0.1);
         }
 
         .chapter-navigation button {
@@ -450,7 +577,6 @@
             opacity: 0.3;
             cursor: not-allowed;
             transform: none;
-            box-shadow: none;
         }
 
         .chapter-navigation span {
@@ -462,7 +588,6 @@
             padding: 8px 30px;
             border-radius: 4px;
             border: 1px solid #8b6b4f;
-            box-shadow: inset 0 1px 4px rgba(0,0,0,0.1);
         }
 
         /* Book grid */
@@ -476,9 +601,8 @@
             border: 1px solid #b5977a;
             margin-top: 15px;
             max-height: 500px;
-            overflow-y: auto;  /* VERTICAL SCROLL ONLY */
+            overflow-y: auto;
             overflow-x: hidden;
-            box-shadow: inset 0 0 15px rgba(139, 107, 79, 0.1);
         }
 
         .book-grid button {
@@ -488,13 +612,6 @@
             background: #fff9f0;
             border: 1px solid #b5977a;
             margin: 0;
-            box-shadow: 0 2px 5px rgba(100, 70, 40, 0.1);
-        }
-
-        .book-grid button:hover {
-            background: #e8d5b5;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 10px rgba(100, 70, 40, 0.15);
         }
 
         /* Chapter grid */
@@ -508,9 +625,8 @@
             border: 1px solid #b5977a;
             margin: 15px 0;
             max-height: 400px;
-            overflow-y: auto;  /* VERTICAL SCROLL ONLY */
+            overflow-y: auto;
             overflow-x: hidden;
-            box-shadow: inset 0 0 15px rgba(139, 107, 79, 0.1);
         }
 
         .chapter-grid button {
@@ -521,12 +637,7 @@
             border: 1px solid #b5977a;
         }
 
-        .chapter-grid button:hover {
-            background: #e8d5b5;
-            transform: translateY(-2px);
-        }
-
-        /* Verse text - VERTICAL SCROLLING, NO COLUMNS */
+        /* Verse text */
         #chapter-text {
             font-family: 'Cormorant Garamond', 'Georgia', serif;
             line-height: 2;
@@ -541,12 +652,12 @@
             border: 1px solid #b5977a;
             margin-top: 15px;
             max-height: 500px;
-            overflow-y: auto;  /* VERTICAL SCROLLING ONLY */
-            overflow-x: hidden; /* NO horizontal scrolling */
+            overflow-y: auto;
+            overflow-x: hidden;
             font-size: 22px;
-            box-shadow: inset 0 0 25px rgba(139, 107, 79, 0.1);
+            column-count: 1;
             width: 100%;
-            column-count: 1;  /* SINGLE COLUMN - vertical scroll */
+            transition: background 0.3s, color 0.3s;
         }
 
         #chapter-text p {
@@ -555,16 +666,7 @@
             background: rgba(255, 255, 255, 0.5);
             border-radius: 4px;
             border-left: 3px solid #b5977a;
-            transition: all 0.2s;
-            word-wrap: break-word; /* Prevents horizontal scrolling */
-            width: 100%;
-        }
-
-        #chapter-text p:hover {
-            background: #fff9f0;
-            transform: translateX(3px);
-            box-shadow: 0 2px 8px rgba(139, 107, 79, 0.1);
-            border-left-color: #8b6b4f;
+            word-wrap: break-word;
         }
 
         #chapter-text strong {
@@ -593,22 +695,6 @@
             font-size: 20px;
         }
 
-        /* Section containers */
-        #askSection, #bibleSection, #readerSection {
-            animation: fadeInPage 0.4s ease;
-        }
-
-        @keyframes fadeInPage {
-            from { 
-                opacity: 0;
-                transform: translateY(5px);
-            }
-            to { 
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         /* Loading indicator */
         .loading {
             text-align: center;
@@ -616,7 +702,6 @@
             color: #8b6b4f;
             font-size: 24px;
             font-style: italic;
-            position: relative;
         }
 
         .loading::after {
@@ -630,113 +715,156 @@
         }
 
         @keyframes gentleSpin {
-            0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
 
         /* Mobile responsive */
-        @media (max-width: 600px) {
-            body {
-                padding: 10px;
-            }
-            
-            .app-container {
-                padding: 20px 15px 20px 20px;
+        @media (max-width: 700px) {
+            .settings-panel {
+                width: 280px;
             }
             
             .lang-toggle {
-                position: relative;
-                top: 0;
-                right: 0;
-                text-align: center;
-                margin-bottom: 15px;
+                right: 100px;
+            }
+            
+            .settings-toggle {
+                right: 100px;
+                padding: 8px 15px;
+                font-size: 16px;
+            }
+            
+            #home button {
+                width: 260px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .app-container {
+                padding: 20px 15px 20px 20px;
             }
             
             h1 {
                 font-size: 36px;
             }
             
-            h1 span {
-                font-size: 16px;
-                letter-spacing: 4px;
+            .lang-toggle, .settings-toggle {
+                position: relative;
+                top: 0;
+                right: 0;
+                display: inline-block;
+                margin: 5px;
             }
             
-            #home p {
-                font-size: 20px;
-                padding: 15px 20px;
+            .header-buttons {
+                text-align: center;
+                margin-bottom: 15px;
             }
-            
-            button {
-                padding: 10px 20px;
-                font-size: 18px;
-            }
-            
-            #home button {
-                width: 240px;
-                font-size: 20px;
-                padding: 12px 20px;
-            }
-            
-            .book-grid {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-                padding: 15px;
-            }
-            
-            .book-grid button {
-                font-size: 18px;
-                padding: 10px 6px;
-            }
-            
-            .chapter-navigation {
-                flex-wrap: wrap;
-                gap: 8px;
-                padding: 12px;
-            }
-            
-            .chapter-navigation button {
-                min-width: 110px;
-                padding: 10px 12px;
-                font-size: 16px;
-            }
-            
-            .chapter-navigation span {
-                font-size: 20px;
-                padding: 8px 16px;
-            }
-            
-            #chapter-text {
-                font-size: 18px;
-                padding: 20px;
-            }
-            
-            #chapter-text strong {
-                font-size: 18px;
-                padding: 2px 8px;
-            }
-        }
-
-        /* Subtle corner decoration */
-        .corner-decoration {
-            position: fixed;
-            bottom: 5px;
-            right: 5px;
-            font-size: 30px;
-            color: #8b6b4f;
-            opacity: 0.15;
-            z-index: 5;
-            transform: rotate(-5deg);
-            pointer-events: none;
         }
     </style>
 </head>
 
 <body>
-    <!-- Language Toggle Button -->
-    <div class="lang-toggle">
-        <button onclick="toggleLanguage()">
-            <span class="lang-en">📖 Español</span>
-            <span class="lang-es">📖 English</span>
-        </button>
+    <!-- Settings Panel -->
+    <div class="settings-panel" id="settingsPanel">
+        <button class="close-settings" onclick="toggleSettings()">✕</button>
+        <h2 id="settings-title" class="lang-en">Settings</h2>
+        <h2 id="settings-title" class="lang-es">Configuración</h2>
+
+        <div class="settings-section">
+            <h3 class="lang-en">Theme</h3>
+            <h3 class="lang-es">Tema</h3>
+            <div class="theme-buttons">
+                <button class="theme-btn active" onclick="setTheme('default')" id="themeDefault">
+                    <span class="lang-en">Default</span>
+                    <span class="lang-es">Predeterminado</span>
+                </button>
+                <button class="theme-btn" onclick="setTheme('dark')" id="themeDark">
+                    <span class="lang-en">Dark Mode</span>
+                    <span class="lang-es">Modo Oscuro</span>
+                </button>
+                <button class="theme-btn" onclick="setTheme('sepia')" id="themeSepia">
+                    <span class="lang-en">Sepia</span>
+                    <span class="lang-es">Sepia</span>
+                </button>
+                <button class="theme-btn" onclick="setTheme('highContrast')" id="themeHighContrast">
+                    <span class="lang-en">High Contrast</span>
+                    <span class="lang-es">Alto Contraste</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <h3 class="lang-en">Font Size</h3>
+            <h3 class="lang-es">Tamaño de Letra</h3>
+            <div class="theme-buttons">
+                <button class="theme-btn" onclick="setFontSize('small')" id="fontSmall">
+                    <span class="lang-en">Small</span>
+                    <span class="lang-es">Pequeño</span>
+                </button>
+                <button class="theme-btn active" onclick="setFontSize('medium')" id="fontMedium">
+                    <span class="lang-en">Medium</span>
+                    <span class="lang-es">Mediano</span>
+                </button>
+                <button class="theme-btn" onclick="setFontSize('large')" id="fontLarge">
+                    <span class="lang-en">Large</span>
+                    <span class="lang-es">Grande</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <h3 class="lang-en">Language</h3>
+            <h3 class="lang-es">Idioma</h3>
+            <div class="theme-buttons">
+                <button class="theme-btn" onclick="setLanguage('en')" id="langEn">
+                    <span class="lang-en">English</span>
+                    <span class="lang-es">Inglés</span>
+                </button>
+                <button class="theme-btn" onclick="setLanguage('es')" id="langEs">
+                    <span class="lang-en">Spanish</span>
+                    <span class="lang-es">Español</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <h3 class="lang-en">Custom Background Color</h3>
+            <h3 class="lang-es">Color de Fondo Personalizado</h3>
+            <div class="settings-option">
+                <label for="bgColorPicker" class="lang-en">Choose color:</label>
+                <label for="bgColorPicker" class="lang-es">Elige color:</label>
+                <input type="color" id="bgColorPicker" value="#d9c8a9" onchange="setCustomBackground(this.value)">
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <h3 class="lang-en">Brightness</h3>
+            <h3 class="lang-es">Brillo</h3>
+            <div class="settings-option">
+                <input type="range" id="brightnessSlider" min="0.5" max="1.5" step="0.1" value="1" onchange="setBrightness(this.value)">
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <h3 class="lang-en">Reset to Defaults</h3>
+            <h3 class="lang-es">Restablecer</h3>
+            <button onclick="resetSettings()" style="width:100%;">
+                <span class="lang-en">Reset All Settings</span>
+                <span class="lang-es">Restablecer Todo</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Header Buttons -->
+    <div class="header-buttons" style="position: absolute; top: 20px; right: 20px; z-index: 30; display: flex; gap: 10px;">
+        <button class="settings-toggle" onclick="toggleSettings()">⚙️ <span class="lang-en">Settings</span><span class="lang-es">Ajustes</span></button>
+        <div class="lang-toggle">
+            <button onclick="toggleLanguage()">
+                <span class="lang-en">📖 Español</span>
+                <span class="lang-es">📖 English</span>
+            </button>
+        </div>
     </div>
 
     <!-- Subtle decoration -->
@@ -821,20 +949,120 @@
     </div>
 
     <script>
-        // Language toggle function
-        function toggleLanguage() {
-            document.body.classList.toggle('spanish');
-            
-            // Update input placeholders based on language
-            const isSpanish = document.body.classList.contains('spanish');
-            
-            document.getElementById('question').style.display = isSpanish ? 'none' : 'block';
-            document.getElementById('question-es').style.display = isSpanish ? 'block' : 'none';
-            document.getElementById('bibleSearch').style.display = isSpanish ? 'none' : 'block';
-            document.getElementById('bibleSearch-es').style.display = isSpanish ? 'block' : 'none';
+        // Settings functions
+        function toggleSettings() {
+            document.getElementById('settingsPanel').classList.toggle('open');
         }
 
-        // Page turn animation function - more subtle
+        function setTheme(theme) {
+            // Remove all theme classes
+            document.body.classList.remove('dark-mode', 'sepia-mode', 'high-contrast');
+            
+            // Add selected theme
+            if (theme === 'dark') {
+                document.body.classList.add('dark-mode');
+            } else if (theme === 'sepia') {
+                document.body.classList.add('sepia-mode');
+            } else if (theme === 'highContrast') {
+                document.body.classList.add('high-contrast');
+            }
+            
+            // Update active button states
+            document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`theme${theme.charAt(0).toUpperCase() + theme.slice(1)}`).classList.add('active');
+            
+            // Save to localStorage
+            localStorage.setItem('bibleAppTheme', theme);
+        }
+
+        function setFontSize(size) {
+            document.body.classList.remove('font-small', 'font-medium', 'font-large');
+            document.body.classList.add(`font-${size}`);
+            
+            document.querySelectorAll('[id^="font"]').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`font${size.charAt(0).toUpperCase() + size.slice(1)}`).classList.add('active');
+            
+            localStorage.setItem('bibleAppFontSize', size);
+        }
+
+        function setLanguage(lang) {
+            if (lang === 'es') {
+                document.body.classList.add('spanish');
+            } else {
+                document.body.classList.remove('spanish');
+            }
+            
+            // Update input visibility
+            document.getElementById('question').style.display = lang === 'en' ? 'block' : 'none';
+            document.getElementById('question-es').style.display = lang === 'es' ? 'block' : 'none';
+            document.getElementById('bibleSearch').style.display = lang === 'en' ? 'block' : 'none';
+            document.getElementById('bibleSearch-es').style.display = lang === 'es' ? 'block' : 'none';
+            
+            localStorage.setItem('bibleAppLanguage', lang);
+        }
+
+        function setCustomBackground(color) {
+            document.body.style.background = color;
+            document.body.style.backgroundImage = 'radial-gradient(circle at 30% 40%, rgba(139, 107, 79, 0.08) 1px, transparent 1px)';
+            localStorage.setItem('bibleAppCustomBg', color);
+        }
+
+        function setBrightness(value) {
+            document.body.style.filter = `brightness(${value})`;
+            localStorage.setItem('bibleAppBrightness', value);
+        }
+
+        function resetSettings() {
+            // Reset to defaults
+            setTheme('default');
+            setFontSize('medium');
+            setLanguage('en');
+            document.body.style.background = '';
+            document.body.style.backgroundImage = '';
+            document.body.style.filter = '';
+            
+            // Reset color picker
+            document.getElementById('bgColorPicker').value = '#d9c8a9';
+            document.getElementById('brightnessSlider').value = '1';
+            
+            // Clear localStorage
+            localStorage.clear();
+        }
+
+        // Load saved settings on page load
+        function loadSavedSettings() {
+            const savedTheme = localStorage.getItem('bibleAppTheme');
+            if (savedTheme) setTheme(savedTheme);
+            
+            const savedFontSize = localStorage.getItem('bibleAppFontSize');
+            if (savedFontSize) setFontSize(savedFontSize);
+            
+            const savedLanguage = localStorage.getItem('bibleAppLanguage');
+            if (savedLanguage) setLanguage(savedLanguage);
+            
+            const savedBg = localStorage.getItem('bibleAppCustomBg');
+            if (savedBg) {
+                document.body.style.background = savedBg;
+                document.getElementById('bgColorPicker').value = savedBg;
+            }
+            
+            const savedBrightness = localStorage.getItem('bibleAppBrightness');
+            if (savedBrightness) {
+                document.body.style.filter = `brightness(${savedBrightness})`;
+                document.getElementById('brightnessSlider').value = savedBrightness;
+            }
+        }
+
+        // Language toggle function
+        function toggleLanguage() {
+            if (document.body.classList.contains('spanish')) {
+                setLanguage('en');
+            } else {
+                setLanguage('es');
+            }
+        }
+
+        // Page turn animation function
         function turnPage(element) {
             element.classList.add('page-turn');
             setTimeout(() => {
@@ -875,7 +1103,7 @@
             document.getElementById("readerSection").style.display = "none";
         }
 
-        // Bilingual topics (same as before, keeping it concise here)
+        // Bilingual topics
         const topics = [
             {
                 keywords: ["lust", "temptation", "desire"],
@@ -1017,7 +1245,6 @@
             }
             
             resultDiv.innerHTML = output;
-            // Scroll to top of result
             resultDiv.scrollTop = 0;
         }
 
@@ -1166,7 +1393,6 @@
                             'Could not load verses. Please try again later.'}</p>`;
                     }
                     document.getElementById("chapter-text").innerHTML = versesOutput;
-                    // Scroll to top of chapter
                     document.getElementById("chapter-text").scrollTop = 0;
                 })
                 .catch(error => {
@@ -1220,6 +1446,9 @@
                         'Error searching. Please try again.'}</p>`;
                 });
         }
+
+        // Load saved settings when page loads
+        window.onload = loadSavedSettings;
     </script>
 </body>
 
