@@ -89,15 +89,15 @@ function answerQuestion() {
         for (let k of t.keywords) {
             if (q.includes(k)) {
                 output += `
-                <div style="background:#f9f9f9; padding:15px; margin-bottom:15px; border-radius:8px;">
-                    <h3 style="color:#2c3e50;">📖 Scripture</h3>
+                <div style="background:rgba(255,245,235,0.8); padding:20px; margin-bottom:20px; border-radius:15px;">
+                    <h3 style="color:#3f352c;">📖 Scripture</h3>
                     <p><strong>${t.verse}</strong></p>
                     <p><em>"${t.text}"</em></p>
                     
-                    <h3 style="color:#2c3e50;">💭 Explanation</h3>
+                    <h3 style="color:#3f352c;">💭 Explanation</h3>
                     <p>${t.explanation}</p>
                     
-                    <h3 style="color:#2c3e50;">🌟 Guidance</h3>
+                    <h3 style="color:#3f352c;">🌟 Guidance</h3>
                     <p>${t.guidance}</p>
                 </div>
                 `;
@@ -109,7 +109,7 @@ function answerQuestion() {
     
     if (!found) {
         output = `
-        <div style="background:#f9f9f9; padding:20px; border-radius:8px;">
+        <div style="background:rgba(255,245,235,0.8); padding:25px; border-radius:15px;">
             <p>I don't have an answer for that specific question yet. Here are some topics I can help with:</p>
             <p>• Lust and temptation<br>• Anger<br>• Failure and self-hatred<br>• Forgiveness<br>• Jealousy<br>• Loneliness<br>• Purpose and direction</p>
             <p>Try asking about one of these topics, or check back soon as we add more!</p>
@@ -120,7 +120,6 @@ function answerQuestion() {
     resultDiv.innerHTML = output;
 }
 
-// Bible books for the reader
 const bibleBooks = [
     "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy", "Joshua", "Judges", "Ruth",
     "1 Samuel", "2 Samuel", "1 Kings", "2 Kings", "1 Chronicles", "2 Chronicles", "Ezra", "Nehemiah",
@@ -133,7 +132,6 @@ const bibleBooks = [
     "1 John", "2 John", "3 John", "Jude", "Revelation"
 ];
 
-// Chapter counts for each book
 const chapterCounts = {
     "Genesis": 50, "Exodus": 40, "Leviticus": 27, "Numbers": 36, "Deuteronomy": 34,
     "Joshua": 24, "Judges": 21, "Ruth": 4, "1 Samuel": 31, "2 Samuel": 24,
@@ -152,99 +150,21 @@ const chapterCounts = {
     "Revelation": 22
 };
 
-function loadBooks() {
-    let output = "<h3>Select a Book:</h3><div style='display:grid; grid-template-columns:repeat(auto-fill, minmax(120px,1fr)); gap:10px;'>";
-    
-    for (let book of bibleBooks) {
-        output += `<button onclick="loadChapters('${book}')" style="margin:2px; padding:8px;">${book}</button>`;
-    }
-    
-    output += "</div>";
-    document.getElementById("readerContent").innerHTML = output;
-}
-
-function loadChapters(book) {
-    let maxChapters = chapterCounts[book] || 50;
-    let output = `<button onclick="loadBooks()" style="margin-bottom:15px;">← Back to Books</button>`;
-    output += `<h3>${book} - Select Chapter:</h3><div style='display:grid; grid-template-columns:repeat(auto-fill, minmax(70px,1fr)); gap:5px;'>`;
-    
-    for (let i = 1; i <= maxChapters; i++) {
-        output += `<button onclick="loadChapter('${book}', ${i})" style="margin:2px; padding:5px;">${i}</button>`;
-    }
-    
-    output += "</div>";
-    document.getElementById("readerContent").innerHTML = output;
-}
-
-function loadChapter(book, chapter) {
-    let output = `<button onclick="loadChapters('${book}')" style="margin-bottom:15px;">← Back to Chapters</button>`;
-    output += `<h3>${book} ${chapter}</h3><div style='text-align:left;' id="chapter-text">`;
-    output += `<p><em>Loading ${book} ${chapter}...</em></p>`;
-    output += "</div>";
-    document.getElementById("readerContent").innerHTML = output;
-    
-    // Use a free Bible API to get the actual verses
-    fetch(`https://bible-api.com/${book}+${chapter}?translation=kjv`)
-        .then(response => response.json())
-        .then(data => {
-            let versesOutput = "";
-            if (data.verses) {
-                data.verses.forEach(verse => {
-                    versesOutput += `<p><strong>${verse.verse}</strong> ${verse.text}</p>`;
-                });
-            } else {
-                versesOutput = "<p>Could not load verses. Please try again later.</p>";
-            }
-            document.getElementById("chapter-text").innerHTML = versesOutput;
-        })
-        .catch(error => {
-            document.getElementById("chapter-text").innerHTML = "<p>Error loading chapter. Please try again.</p>";
-        });
-}
-
-// Search Bible function using API
-function searchBible() {
-    let word = document.getElementById("bibleSearch").value.toLowerCase();
-    let resultDiv = document.getElementById("bibleResult");
-    
-    resultDiv.innerHTML = "<p><em>Searching...</em></p>";
-    
-    // Use Bible API for search (this searches the whole KJV Bible)
-    fetch(`https://bible-api.com/${encodeURIComponent(word)}?translation=kjv`)
-        .then(response => response.json())
-        .then(data => {
-            let output = "";
-            let count = 0;
-            
-            if (data.verses && data.verses.length > 0) {
-                data.verses.forEach(verse => {
-                    output += `
-                    <div style="background:#f9f9f9; padding:10px; margin-bottom:10px; border-radius:5px;">
-                        <p><strong>${verse.book} ${verse.chapter}:${verse.verse}</strong><br>
-                        ${verse.text}</p>
-                    </div>
-                    `;
-                    count++;
-                });
-                output = `<p>Found ${count} verses:</p>` + output;
-            } else {
-                output = "<p>No verses found. Try a different word like 'love', 'faith', or 'pray'.</p>";
-            }
-            
-            resultDiv.innerHTML = output;
-        })
-        .catch(error => {
-            resultDiv.innerHTML = "<p>Error searching. Please try again.</p>";
-        });
-}
-// ... (keep all your existing functions like showAsk, showBible, showReader, goHome, topics, answerQuestion)
-
-// Add these variables at the top with your other variables
 let currentBook = "";
 let currentChapter = 1;
 let maxChapters = 0;
 
-// Update your loadChapters function
+function loadBooks() {
+    let output = "<h3>Select a Book:</h3><div class='book-grid'>";
+    
+    for (let book of bibleBooks) {
+        output += `<button onclick="loadChapters('${book}')">${book}</button>`;
+    }
+    
+    output += "</div>";
+    document.getElementById("readerContent").innerHTML = output;
+}
+
 function loadChapters(book) {
     currentBook = book;
     maxChapters = chapterCounts[book] || 50;
@@ -260,7 +180,6 @@ function loadChapters(book) {
     document.getElementById("readerContent").innerHTML = output;
 }
 
-// Update your loadChapter function with navigation
 function loadChapter(book, chapter) {
     currentBook = book;
     currentChapter = chapter;
@@ -270,7 +189,6 @@ function loadChapter(book, chapter) {
     output += `<button onclick="loadChapters('${book}')">← Back to Chapters</button>`;
     output += `</div>`;
     
-    // Add chapter navigation
     output += `<div class="chapter-navigation">`;
     if (chapter > 1) {
         output += `<button onclick="loadChapter('${book}', ${chapter - 1})">← Previous</button>`;
@@ -288,13 +206,12 @@ function loadChapter(book, chapter) {
     
     output += `</div>`;
     
-    output += `<div id="chapter-text" style='text-align:left;'>`;
+    output += `<div id="chapter-text">`;
     output += `<p class="loading">Loading ${book} ${chapter}...</p>`;
     output += `</div>`;
     
     document.getElementById("readerContent").innerHTML = output;
     
-    // Use Bible API to get the actual verses
     fetch(`https://bible-api.com/${book}+${chapter}?translation=kjv`)
         .then(response => response.json())
         .then(data => {
@@ -311,19 +228,38 @@ function loadChapter(book, chapter) {
         .catch(error => {
             document.getElementById("chapter-text").innerHTML = "<p>Error loading chapter. Please try again.</p>";
         });
-// Chapter navigation is already in the loadChapter function:
-output += `<div class="chapter-navigation">`;
-if (chapter > 1) {
-    output += `<button onclick="loadChapter('${book}', ${chapter - 1})">← Previous</button>`;
-} else {
-    output += `<button disabled style="opacity:0.5; cursor:not-allowed;">← Previous</button>`;
 }
 
-output += `<span>${book} ${chapter}</span>`;
-
-if (chapter < maxChapters) {
-    output += `<button onclick="loadChapter('${book}', ${chapter + 1})">Next →</button>`;
-} else {
-    output += `<button disabled style="opacity:0.5; cursor:not-allowed;">Next →</button>`;
+function searchBible() {
+    let word = document.getElementById("bibleSearch").value.toLowerCase();
+    let resultDiv = document.getElementById("bibleResult");
+    
+    resultDiv.innerHTML = "<p class='loading'>Searching...</p>";
+    
+    fetch(`https://bible-api.com/${encodeURIComponent(word)}?translation=kjv`)
+        .then(response => response.json())
+        .then(data => {
+            let output = "";
+            let count = 0;
+            
+            if (data.verses && data.verses.length > 0) {
+                data.verses.forEach(verse => {
+                    output += `
+                    <div style="background:rgba(255,245,235,0.8); padding:15px; margin-bottom:15px; border-radius:10px;">
+                        <p><strong>${verse.book} ${verse.chapter}:${verse.verse}</strong><br>
+                        ${verse.text}</p>
+                    </div>
+                    `;
+                    count++;
+                });
+                output = `<p>Found ${count} verses:</p>` + output;
+            } else {
+                output = "<p>No verses found. Try a different word like 'love', 'faith', or 'pray'.</p>";
+            }
+            
+            resultDiv.innerHTML = output;
+        })
+        .catch(error => {
+            resultDiv.innerHTML = "<p>Error searching. Please try again.</p>";
+        });
 }
-output += `</div>`;
