@@ -39,6 +39,30 @@
             border-color: #b5977a;
         }
 
+        body.dark-mode h1, 
+        body.dark-mode h2, 
+        body.dark-mode h3,
+        body.dark-mode p,
+        body.dark-mode span,
+        body.dark-mode button,
+        body.dark-mode input,
+        body.dark-mode #answerResult,
+        body.dark-mode #bibleResult,
+        body.dark-mode #readerContent,
+        body.dark-mode #chapter-text {
+            color: #e8d5b5;
+        }
+
+        body.dark-mode button {
+            background: #4a3b2f;
+            border-color: #b5977a;
+        }
+
+        body.dark-mode input {
+            background: #4a3b2f;
+            color: #e8d5b5;
+        }
+
         /* Main app container */
         .app-container {
             max-width: 500px;
@@ -106,9 +130,10 @@
             flex: 1;
             padding: 20px;
             overflow-y: auto;
+            max-height: calc(90vh - 180px);
         }
 
-        /* Cards - like in the wireframe */
+        /* Cards */
         .card {
             background: #fff9f0;
             border-radius: 15px;
@@ -139,7 +164,7 @@
             font-size: 12px;
         }
 
-        /* Progress bar - like in wireframe */
+        /* Progress bar */
         .progress-section {
             margin: 15px 0;
         }
@@ -166,7 +191,7 @@
             transition: width 0.3s;
         }
 
-        /* Option buttons - like wireframe options */
+        /* Option buttons */
         .option-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -193,7 +218,7 @@
             border-color: #5c3e2d;
         }
 
-        /* Date display - like in wireframe */
+        /* Date display */
         .date-display {
             background: #e8d5b5;
             padding: 15px;
@@ -235,7 +260,7 @@
             font-size: 40px;
         }
 
-        /* Action buttons row - like in wireframe */
+        /* Action buttons row */
         .action-row {
             display: flex;
             gap: 10px;
@@ -266,7 +291,7 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        /* Bottom navigation - like wireframe */
+        /* Bottom navigation */
         .bottom-nav {
             background: #8b6b4f;
             display: flex;
@@ -368,7 +393,83 @@
             display: block;
         }
 
-        /* Verse display */
+        /* Bible Reading Styles */
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 5px;
+        }
+
+        .book-grid button {
+            padding: 15px 5px;
+            background: #fff9f0;
+            border: 1px solid #b5977a;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .book-grid button:hover {
+            background: #8b6b4f;
+            color: #f5ebdc;
+        }
+
+        .chapter-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin: 15px 0;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 5px;
+        }
+
+        .chapter-grid button {
+            padding: 12px 5px;
+            background: #fff9f0;
+            border: 1px solid #b5977a;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .chapter-grid button:hover {
+            background: #8b6b4f;
+            color: #f5ebdc;
+        }
+
+        #chapter-text {
+            font-family: 'Cormorant Garamond', 'Georgia', serif;
+            line-height: 1.8;
+            color: #4a3729;
+            padding: 20px;
+            background: #fff9f0;
+            border-radius: 8px;
+            border: 1px solid #b5977a;
+            margin-top: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-size: 18px;
+        }
+
+        #chapter-text p {
+            margin-bottom: 12px;
+            padding: 5px 0;
+            border-bottom: 1px dotted #e8d5b5;
+        }
+
+        #chapter-text strong {
+            color: #8b6b4f;
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
         .verse-text {
             font-size: 18px;
             line-height: 1.6;
@@ -382,51 +483,45 @@
             text-align: right;
         }
 
-        /* Book grid */
-        .book-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .book-grid button {
-            padding: 15px 5px;
-            background: #fff9f0;
-            border: 1px solid #b5977a;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: all 0.2s;
-        }
-
-        .book-grid button:hover {
-            background: #8b6b4f;
-            color: #f5ebdc;
-        }
-
-        /* Chapter grid */
-        .chapter-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 8px;
-            margin: 15px 0;
-        }
-
-        .chapter-grid button {
-            padding: 12px 5px;
-            background: #fff9f0;
-            border: 1px solid #b5977a;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
         /* Loading indicator */
         .loading {
             text-align: center;
             padding: 40px;
             color: #8b6b4f;
             font-size: 20px;
+        }
+
+        .loading::after {
+            content: '✝';
+            animation: gentleSpin 2s linear infinite;
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        @keyframes gentleSpin {
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Error message */
+        .error-message {
+            color: #a94442;
+            background: #f2dede;
+            border: 1px solid #ebccd1;
+            border-radius: 4px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        /* Search results */
+        .search-result {
+            padding: 12px;
+            margin-bottom: 10px;
+            border-left: 3px solid #8b6b4f;
+            background: #fff9f0;
+        }
+
+        .search-result strong {
+            color: #8b6b4f;
         }
 
         /* Mobile responsive */
@@ -441,6 +536,10 @@
             
             .book-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .chapter-grid {
+                grid-template-columns: repeat(4, 1fr);
             }
         }
 
@@ -457,14 +556,18 @@
             display: inline;
         }
 
-        body.spanish .lang-es-block {
-            display: block;
-        }
-
         /* Font size classes */
         body.font-small { font-size: 14px; }
+        body.font-small button { font-size: 14px; }
+        body.font-small #chapter-text { font-size: 16px; }
+        
         body.font-medium { font-size: 16px; }
+        body.font-medium button { font-size: 16px; }
+        body.font-medium #chapter-text { font-size: 18px; }
+        
         body.font-large { font-size: 18px; }
+        body.font-large button { font-size: 18px; }
+        body.font-large #chapter-text { font-size: 20px; }
     </style>
 </head>
 
@@ -554,17 +657,17 @@
                         <div class="progress-label">
                             <span class="lang-en">Daily Reading</span>
                             <span class="lang-es">Lectura Diaria</span>
-                            <span id="progressPercent">0%</span>
+                            <span id="progressPercent">33%</span>
                         </div>
                         <div class="progress-bar">
-                            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                            <div class="progress-fill" id="progressFill" style="width: 33%"></div>
                         </div>
                     </div>
 
                     <div class="date-display">
-                        <span id="verseOfDay">Psalm 23:1</span>
-                        <small class="lang-en">The Lord is my shepherd</small>
-                        <small class="lang-es">El Señor es mi pastor</small>
+                        <span id="verseOfDay">John 3:16</span>
+                        <small class="lang-en">Verse of the Day</small>
+                        <small class="lang-es">Versículo del Día</small>
                     </div>
 
                     <div class="action-row">
@@ -583,7 +686,7 @@
                     </div>
                 </div>
 
-                <!-- Reading Plan Options Card - like wireframe -->
+                <!-- Reading Plan Options Card -->
                 <div class="card">
                     <div class="card-header">
                         <h2 class="lang-en">Reading Plans</h2>
@@ -591,10 +694,10 @@
                     </div>
                     
                     <div class="option-grid">
-                        <button class="option-btn active" onclick="selectPlan(1)">30 Days</button>
-                        <button class="option-btn" onclick="selectPlan(2)">90 Days</button>
-                        <button class="option-btn" onclick="selectPlan(3)">180 Days</button>
-                        <button class="option-btn" onclick="selectPlan(4)">Year</button>
+                        <button class="option-btn active" onclick="selectPlan(30)">30 Days</button>
+                        <button class="option-btn" onclick="selectPlan(90)">90 Days</button>
+                        <button class="option-btn" onclick="selectPlan(180)">180 Days</button>
+                        <button class="option-btn" onclick="selectPlan(365)">Year</button>
                     </div>
 
                     <div class="date-display">
@@ -618,7 +721,7 @@
                         <h3 class="lang-es">Lectura de Ayer</h3>
                         <p class="verse-text" id="lastReading">Psalm 23</p>
                         <div class="action-row">
-                            <button class="action-btn" onclick="loadChapter('Psalm', 23)">
+                            <button class="action-btn" onclick="loadChapter('Psalm', 23, 'Psalm')">
                                 <span class="lang-en">Review</span>
                                 <span class="lang-es">Revisar</span>
                             </button>
@@ -671,13 +774,14 @@
                 </div>
             </div>
 
-            <!-- Reader Section -->
+            <!-- Reader Section - FULL BIBLE INTEGRATION -->
             <div id="readerSection" class="content-section">
                 <div class="card">
                     <h2 class="lang-en">Read the Bible</h2>
                     <h2 class="lang-es">Leer la Biblia</h2>
                     
                     <div id="readerContent">
+                        <!-- Books will be loaded here by JavaScript -->
                         <p class="loading">
                             <span class="lang-en">Loading books...</span>
                             <span class="lang-es">Cargando libros...</span>
@@ -691,7 +795,7 @@
             </div>
         </div>
 
-        <!-- Bottom Navigation - exactly like wireframe -->
+        <!-- Bottom Navigation -->
         <div class="bottom-nav">
             <div class="nav-item active" onclick="showHome()">
                 <i>🏠</i>
@@ -717,12 +821,92 @@
     </div>
 
     <script>
-        // Navigation functions
+        // ============= COMPLETE BIBLE BOOKS DATA =============
+        // All 66 books of the Bible with their chapter counts [citation:2]
+        const bibleBooks = [
+            // Old Testament
+            { id: "Genesis", name: "Genesis", name_es: "Génesis", chapters: 50 },
+            { id: "Exodus", name: "Exodus", name_es: "Éxodo", chapters: 40 },
+            { id: "Leviticus", name: "Leviticus", name_es: "Levítico", chapters: 27 },
+            { id: "Numbers", name: "Numbers", name_es: "Números", chapters: 36 },
+            { id: "Deuteronomy", name: "Deuteronomy", name_es: "Deuteronomio", chapters: 34 },
+            { id: "Joshua", name: "Joshua", name_es: "Josué", chapters: 24 },
+            { id: "Judges", name: "Judges", name_es: "Jueces", chapters: 21 },
+            { id: "Ruth", name: "Ruth", name_es: "Rut", chapters: 4 },
+            { id: "1 Samuel", name: "1 Samuel", name_es: "1 Samuel", chapters: 31 },
+            { id: "2 Samuel", name: "2 Samuel", name_es: "2 Samuel", chapters: 24 },
+            { id: "1 Kings", name: "1 Kings", name_es: "1 Reyes", chapters: 22 },
+            { id: "2 Kings", name: "2 Kings", name_es: "2 Reyes", chapters: 25 },
+            { id: "1 Chronicles", name: "1 Chronicles", name_es: "1 Crónicas", chapters: 29 },
+            { id: "2 Chronicles", name: "2 Chronicles", name_es: "2 Crónicas", chapters: 36 },
+            { id: "Ezra", name: "Ezra", name_es: "Esdras", chapters: 10 },
+            { id: "Nehemiah", name: "Nehemiah", name_es: "Nehemías", chapters: 13 },
+            { id: "Esther", name: "Esther", name_es: "Ester", chapters: 10 },
+            { id: "Job", name: "Job", name_es: "Job", chapters: 42 },
+            { id: "Psalm", name: "Psalm", name_es: "Salmos", chapters: 150 },
+            { id: "Proverbs", name: "Proverbs", name_es: "Proverbios", chapters: 31 },
+            { id: "Ecclesiastes", name: "Ecclesiastes", name_es: "Eclesiastés", chapters: 12 },
+            { id: "Song of Solomon", name: "Song of Solomon", name_es: "Cantares", chapters: 8 },
+            { id: "Isaiah", name: "Isaiah", name_es: "Isaías", chapters: 66 },
+            { id: "Jeremiah", name: "Jeremiah", name_es: "Jeremías", chapters: 52 },
+            { id: "Lamentations", name: "Lamentations", name_es: "Lamentaciones", chapters: 5 },
+            { id: "Ezekiel", name: "Ezekiel", name_es: "Ezequiel", chapters: 48 },
+            { id: "Daniel", name: "Daniel", name_es: "Daniel", chapters: 12 },
+            { id: "Hosea", name: "Hosea", name_es: "Oseas", chapters: 14 },
+            { id: "Joel", name: "Joel", name_es: "Joel", chapters: 3 },
+            { id: "Amos", name: "Amos", name_es: "Amós", chapters: 9 },
+            { id: "Obadiah", name: "Obadiah", name_es: "Abdías", chapters: 1 },
+            { id: "Jonah", name: "Jonah", name_es: "Jonás", chapters: 4 },
+            { id: "Micah", name: "Micah", name_es: "Miqueas", chapters: 7 },
+            { id: "Nahum", name: "Nahum", name_es: "Nahúm", chapters: 3 },
+            { id: "Habakkuk", name: "Habakkuk", name_es: "Habacuc", chapters: 3 },
+            { id: "Zephaniah", name: "Zephaniah", name_es: "Sofonías", chapters: 3 },
+            { id: "Haggai", name: "Haggai", name_es: "Hageo", chapters: 2 },
+            { id: "Zechariah", name: "Zechariah", name_es: "Zacarías", chapters: 14 },
+            { id: "Malachi", name: "Malachi", name_es: "Malaquías", chapters: 4 },
+            
+            // New Testament
+            { id: "Matthew", name: "Matthew", name_es: "Mateo", chapters: 28 },
+            { id: "Mark", name: "Mark", name_es: "Marcos", chapters: 16 },
+            { id: "Luke", name: "Luke", name_es: "Lucas", chapters: 24 },
+            { id: "John", name: "John", name_es: "Juan", chapters: 21 },
+            { id: "Acts", name: "Acts", name_es: "Hechos", chapters: 28 },
+            { id: "Romans", name: "Romans", name_es: "Romanos", chapters: 16 },
+            { id: "1 Corinthians", name: "1 Corinthians", name_es: "1 Corintios", chapters: 16 },
+            { id: "2 Corinthians", name: "2 Corinthians", name_es: "2 Corintios", chapters: 13 },
+            { id: "Galatians", name: "Galatians", name_es: "Gálatas", chapters: 6 },
+            { id: "Ephesians", name: "Ephesians", name_es: "Efesios", chapters: 6 },
+            { id: "Philippians", name: "Philippians", name_es: "Filipenses", chapters: 4 },
+            { id: "Colossians", name: "Colossians", name_es: "Colosenses", chapters: 4 },
+            { id: "1 Thessalonians", name: "1 Thessalonians", name_es: "1 Tesalonicenses", chapters: 5 },
+            { id: "2 Thessalonians", name: "2 Thessalonians", name_es: "2 Tesalonicenses", chapters: 3 },
+            { id: "1 Timothy", name: "1 Timothy", name_es: "1 Timoteo", chapters: 6 },
+            { id: "2 Timothy", name: "2 Timothy", name_es: "2 Timoteo", chapters: 4 },
+            { id: "Titus", name: "Titus", name_es: "Tito", chapters: 3 },
+            { id: "Philemon", name: "Philemon", name_es: "Filemón", chapters: 1 },
+            { id: "Hebrews", name: "Hebrews", name_es: "Hebreos", chapters: 13 },
+            { id: "James", name: "James", name_es: "Santiago", chapters: 5 },
+            { id: "1 Peter", name: "1 Peter", name_es: "1 Pedro", chapters: 5 },
+            { id: "2 Peter", name: "2 Peter", name_es: "2 Pedro", chapters: 3 },
+            { id: "1 John", name: "1 John", name_es: "1 Juan", chapters: 5 },
+            { id: "2 John", name: "2 John", name_es: "2 Juan", chapters: 1 },
+            { id: "3 John", name: "3 John", name_es: "3 Juan", chapters: 1 },
+            { id: "Jude", name: "Jude", name_es: "Judas", chapters: 1 },
+            { id: "Revelation", name: "Revelation", name_es: "Apocalipsis", chapters: 22 }
+        ];
+
+        // State variables
+        let currentBook = null;
+        let currentChapter = 1;
+        let currentDisplayBook = null;
+
+        // ============= NAVIGATION FUNCTIONS =============
         function showHome() {
             document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
             document.getElementById('homeSection').classList.add('active');
             document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
             document.querySelectorAll('.nav-item')[0].classList.add('active');
+            updateDate();
         }
 
         function showAsk() {
@@ -747,107 +931,142 @@
             loadBooks();
         }
 
-        // Update today's date
-        function updateDate() {
-            const today = new Date();
-            const options = { month: 'short', day: 'numeric', year: 'numeric' };
-            document.getElementById('todayDate').textContent = today.toLocaleDateString('en-US', options);
+        // ============= BIBLE READING FUNCTIONS - FULL INTEGRATION =============
+        
+        // Load all books of the Bible
+        function loadBooks() {
+            const isSpanish = document.body.classList.contains('spanish');
+            let output = '<h3 class="lang-en">Select a Book:</h3><h3 class="lang-es">Selecciona un Libro:</h3>';
+            output += '<div class="book-grid">';
             
-            // Set completion date (30 days from now)
-            const completion = new Date();
-            completion.setDate(completion.getDate() + 30);
-            document.getElementById('completionDate').textContent = completion.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-        }
-
-        // Plan selection
-        function selectPlan(days) {
-            document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active');
+            bibleBooks.forEach(book => {
+                const displayName = isSpanish ? book.name_es : book.name;
+                output += `<button onclick="loadChapters('${book.id}', '${book.name}', '${book.name_es}')">${displayName}</button>`;
+            });
             
-            const completion = new Date();
-            completion.setDate(completion.getDate() + days);
-            document.getElementById('completionDate').textContent = completion.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            output += '</div>';
+            document.getElementById('readerContent').innerHTML = output;
         }
 
-        // Settings functions
-        function toggleSettings() {
-            document.getElementById('settingsPanel').classList.toggle('open');
-        }
-
-        function setTheme(theme) {
-            document.body.classList.remove('dark-mode');
-            if (theme === 'dark') document.body.classList.add('dark-mode');
+        // Load chapters for selected book
+        function loadChapters(bookId, bookNameEn, bookNameEs) {
+            const isSpanish = document.body.classList.contains('spanish');
+            const book = bibleBooks.find(b => b.id === bookId);
+            const displayName = isSpanish ? bookNameEs : bookNameEn;
             
-            document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(`theme${theme.charAt(0).toUpperCase() + theme.slice(1)}`).classList.add('active');
-            localStorage.setItem('bibleAppTheme', theme);
-        }
-
-        function setFontSize(size) {
-            document.body.classList.remove('font-small', 'font-medium', 'font-large');
-            document.body.classList.add(`font-${size}`);
+            let output = `<button onclick="loadBooks()" style="margin:10px 0; padding:10px;">← <span class="lang-en">Back to Books</span><span class="lang-es">Volver a Libros</span></button>`;
+            output += `<h3>${displayName}</h3>`;
+            output += '<div class="chapter-grid">';
             
-            document.querySelectorAll('[id^="font"]').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(`font${size.charAt(0).toUpperCase() + size.slice(1)}`).classList.add('active');
-            localStorage.setItem('bibleAppFontSize', size);
-        }
-
-        function setLanguage(lang) {
-            if (lang === 'es') {
-                document.body.classList.add('spanish');
-            } else {
-                document.body.classList.remove('spanish');
+            for (let i = 1; i <= book.chapters; i++) {
+                output += `<button onclick="loadChapter('${bookId}', ${i}, '${displayName}')">${i}</button>`;
             }
             
-            document.getElementById('question').style.display = lang === 'en' ? 'block' : 'none';
-            document.getElementById('question-es').style.display = lang === 'es' ? 'block' : 'none';
-            document.getElementById('bibleSearch').style.display = lang === 'en' ? 'block' : 'none';
-            document.getElementById('bibleSearch-es').style.display = lang === 'es' ? 'block' : 'none';
-            
-            localStorage.setItem('bibleAppLanguage', lang);
+            output += '</div>';
+            document.getElementById('readerContent').innerHTML = output;
         }
 
-        function toggleLanguage() {
-            if (document.body.classList.contains('spanish')) {
-                setLanguage('en');
-            } else {
-                setLanguage('es');
+        // Load specific chapter using Bible API [citation:3][citation:9]
+        function loadChapter(bookId, chapter, displayName) {
+            currentBook = bookId;
+            currentChapter = chapter;
+            currentDisplayBook = displayName;
+            
+            const isSpanish = document.body.classList.contains('spanish');
+            
+            let output = `<div class="nav-buttons" style="display:flex; justify-content:space-between; margin:10px 0;">`;
+            output += `<button onclick="loadChapters('${bookId}', '${bookId}', '${displayName}')">← <span class="lang-en">Chapters</span><span class="lang-es">Capítulos</span></button>`;
+            
+            // Previous/Next chapter buttons
+            output += `<div>`;
+            if (chapter > 1) {
+                output += `<button onclick="loadChapter('${bookId}', ${chapter - 1}, '${displayName}')" style="margin-right:5px;">← <span class="lang-en">Prev</span><span class="lang-es">Ant</span></button>`;
             }
-        }
-
-        function setCustomBackground(color) {
-            document.body.style.background = color;
-            localStorage.setItem('bibleAppCustomBg', color);
-        }
-
-        function resetSettings() {
-            setTheme('default');
-            setFontSize('medium');
-            setLanguage('en');
-            document.body.style.background = '';
-            document.getElementById('bgColorPicker').value = '#d9c8a9';
-            localStorage.clear();
-        }
-
-        // Load saved settings
-        function loadSavedSettings() {
-            const savedTheme = localStorage.getItem('bibleAppTheme');
-            if (savedTheme) setTheme(savedTheme);
-            
-            const savedFontSize = localStorage.getItem('bibleAppFontSize');
-            if (savedFontSize) setFontSize(savedFontSize);
-            
-            const savedLanguage = localStorage.getItem('bibleAppLanguage');
-            if (savedLanguage) setLanguage(savedLanguage);
-            
-            const savedBg = localStorage.getItem('bibleAppCustomBg');
-            if (savedBg) {
-                document.body.style.background = savedBg;
-                document.getElementById('bgColorPicker').value = savedBg;
+            if (chapter < bibleBooks.find(b => b.id === bookId).chapters) {
+                output += `<button onclick="loadChapter('${bookId}', ${chapter + 1}, '${displayName}')"><span class="lang-en">Next</span><span class="lang-es">Sig</span> →</button>`;
             }
+            output += `</div></div>`;
+            
+            output += `<h3>${displayName} ${chapter}</h3>`;
+            output += `<div id="chapter-text" class="loading"><span class="lang-en">Loading...</span><span class="lang-es">Cargando...</span></div>`;
+            
+            document.getElementById('readerContent').innerHTML = output;
+            
+            // Fetch the actual Bible verses from the API [citation:3][citation:9]
+            const apiUrl = `https://bible-api.com/${bookId}+${chapter}?translation=kjv`;
+            
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    let versesOutput = '';
+                    if (data.verses && data.verses.length > 0) {
+                        data.verses.forEach(verse => {
+                            versesOutput += `<p><strong>${verse.verse}</strong> ${verse.text}</p>`;
+                        });
+                    } else {
+                        versesOutput = `<p class="error-message"><span class="lang-en">No verses found</span><span class="lang-es">No se encontraron versículos</span></p>`;
+                    }
+                    document.getElementById('chapter-text').innerHTML = versesOutput;
+                    document.getElementById('chapter-text').classList.remove('loading');
+                })
+                .catch(error => {
+                    console.error('Error fetching Bible chapter:', error);
+                    document.getElementById('chapter-text').innerHTML = `<p class="error-message"><span class="lang-en">Error loading chapter. Please try again.</span><span class="lang-es">Error al cargar el capítulo. Intente de nuevo.</span></p>`;
+                });
         }
 
-        // Topics data (keeping your existing topics)
+        // ============= SEARCH BIBLE FUNCTION =============
+        function searchBible() {
+            const isSpanish = document.body.classList.contains('spanish');
+            const searchTerm = isSpanish ? 
+                document.getElementById('bibleSearch-es').value : 
+                document.getElementById('bibleSearch').value;
+            
+            if (!searchTerm.trim()) {
+                alert(isSpanish ? 'Por favor ingrese un término de búsqueda' : 'Please enter a search term');
+                return;
+            }
+            
+            const resultDiv = document.getElementById('bibleResult');
+            resultDiv.innerHTML = `<p class="loading"><span class="lang-en">Searching...</span><span class="lang-es">Buscando...</span></p>`;
+            
+            // Use Bible API search [citation:7][citation:9]
+            const apiUrl = `https://bible-api.com/${encodeURIComponent(searchTerm)}?translation=kjv`;
+            
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    let output = '';
+                    if (data.verses && data.verses.length > 0) {
+                        output += `<p><strong><span class="lang-en">Found ${data.verses.length} verses:</span><span class="lang-es">Se encontraron ${data.verses.length} versículos:</span></strong></p>`;
+                        data.verses.slice(0, 10).forEach(verse => {
+                            output += `
+                            <div class="search-result">
+                                <strong>${verse.book} ${verse.chapter}:${verse.verse}</strong><br>
+                                ${verse.text}
+                            </div>
+                            `;
+                        });
+                        if (data.verses.length > 10) {
+                            output += `<p><em><span class="lang-en">Showing first 10 results</span><span class="lang-es">Mostrando primeros 10 resultados</span></em></p>`;
+                        }
+                    } else {
+                        output = `<p class="error-message"><span class="lang-en">No verses found for "${searchTerm}"</span><span class="lang-es">No se encontraron versículos para "${searchTerm}"</span></p>`;
+                    }
+                    resultDiv.innerHTML = output;
+                })
+                .catch(error => {
+                    console.error('Error searching Bible:', error);
+                    resultDiv.innerHTML = `<p class="error-message"><span class="lang-en">Error searching. Please try again.</span><span class="lang-es">Error al buscar. Intente de nuevo.</span></p>`;
+                });
+        }
+
+        // ============= QUESTION ANSWERING FUNCTIONS =============
         const topics = [
             {
                 keywords: ["lust", "temptation", "desire"],
@@ -884,10 +1103,57 @@
                 explanation_es: "El fracaso no define tu valor. Dios ofrece perdón y un nuevo comienzo. Incluso cuando tropiezas, no eres condenado ni rechazado.",
                 guidance: "Learn from your mistake, ask for forgiveness if needed, and focus on growing. Every person who ever did anything great failed many times first.",
                 guidance_es: "Aprende de tu error, pide perdón si es necesario, y concéntrate en crecer. Toda persona que hizo algo grandioso fracasó muchas veces primero."
+            },
+            {
+                keywords: ["forgive", "forgiveness", "hurt", "someone wronged me"],
+                keywords_es: ["perdonar", "perdón", "herido", "alguien me lastimó"],
+                verse: "Ephesians 4:32",
+                verse_es: "Efesios 4:32",
+                text: "Be kind and compassionate to one another, forgiving each other, just as in Christ God forgave you.",
+                text_es: "Antes sed benignos unos con otros, misericordiosos, perdonándoos unos a otros, como también Dios os perdonó a vosotros en Cristo.",
+                explanation: "Forgiveness is not about pretending something didn't hurt. It's about releasing the burden of anger and trusting God with justice.",
+                explanation_es: "El perdón no se trata de pretender que algo no dolió. Se trata de liberar la carga de la ira y confiar en Dios para la justicia.",
+                guidance: "Forgiveness is a process. Start by praying for the person who hurt you, even if you don't feel it yet. This helps your own heart heal.",
+                guidance_es: "El perdón es un proceso. Comienza orando por la persona que te lastimó, incluso si aún no lo sientes. Esto ayuda a que tu propio corazón sane."
+            },
+            {
+                keywords: ["jealous", "jealousy", "envy", "compare"],
+                keywords_es: ["celoso", "celos", "envidia", "comparar"],
+                verse: "Proverbs 14:30",
+                verse_es: "Proverbios 14:30",
+                text: "A heart at peace gives life to the body, but envy rots the bones.",
+                text_es: "El corazón apacible es vida de la carne; mas la envidia es carcoma de los huesos.",
+                explanation: "Jealousy and comparison steal your joy and peace. They make you focus on what others have instead of being grateful for your own blessings.",
+                explanation_es: "Los celos y la comparación roban tu alegría y paz. Te hacen enfocarte en lo que otros tienen en lugar de estar agradecido por tus propias bendiciones.",
+                guidance: "Practice gratitude daily. Write down three things you're thankful for. Celebrate others' success instead of comparing yourself to them.",
+                guidance_es: "Practica la gratitud diariamente. Escribe tres cosas por las que estás agradecido. Celebra el éxito de los demás en lugar de compararte con ellos."
+            },
+            {
+                keywords: ["lonely", "alone", "isolated", "no friends"],
+                keywords_es: ["solo", "soledad", "aislado", "sin amigos"],
+                verse: "Deuteronomy 31:6",
+                verse_es: "Deuteronomio 31:6",
+                text: "Be strong and courageous. Do not be afraid or terrified because of them, for the Lord your God goes with you; he will never leave you nor forsake you.",
+                text_es: "Esforzaos y cobrad ánimo; no temáis, ni tengáis miedo de ellos, porque Jehová tu Dios es el que va contigo; no te dejará, ni te desamparará.",
+                explanation: "Even when you feel alone, God promises to be with you. Loneliness is a feeling, but God's presence is a fact.",
+                explanation_es: "Incluso cuando te sientes solo, Dios promete estar contigo. La soledad es un sentimiento, pero la presencia de Dios es un hecho.",
+                guidance: "Reach out to one person today, even just to say hello. Consider joining a church group or community where you can meet people.",
+                guidance_es: "Comunícate con una persona hoy, aunque solo sea para saludar. Considera unirte a un grupo de la iglesia o comunidad donde puedas conocer personas."
+            },
+            {
+                keywords: ["purpose", "meaning", "why am i here", "direction"],
+                keywords_es: ["propósito", "significado", "por qué estoy aquí", "dirección"],
+                verse: "Jeremiah 29:11",
+                verse_es: "Jeremías 29:11",
+                text: "For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, plans to give you hope and a future.",
+                text_es: "Porque yo sé los pensamientos que tengo acerca de vosotros, dice Jehová, pensamientos de paz, y no de mal, para daros el fin que esperáis.",
+                explanation: "God has a purpose for your life. Even when you don't know your direction, He does. Your existence is not an accident.",
+                explanation_es: "Dios tiene un propósito para tu vida. Incluso cuando no sabes tu dirección, Él la sabe. Tu existencia no es un accidente.",
+                guidance: "Try different activities and see what you enjoy and what helps others. Your purpose often combines what you're good at, what you love, and how you can serve.",
+                guidance_es: "Prueba diferentes actividades y ve qué disfrutas y qué ayuda a los demás. Tu propósito a menudo combina lo que se te da bien, lo que amas y cómo puedes servir."
             }
         ];
 
-        // Answer question function
         function answerQuestion() {
             const isSpanish = document.body.classList.contains('spanish');
             let q = isSpanish ? 
@@ -903,8 +1169,8 @@
                 for (let k of keywords) {
                     if (q.includes(k)) {
                         output += `
-                        <div style="margin-bottom:15px;">
-                            <h3 style="color:#4a3729;">📖 ${isSpanish ? 'Escritura' : 'Scripture'}</h3>
+                        <div style="margin-bottom:15px; padding:10px; border-left:3px solid #8b6b4f;">
+                            <h3 style="color:#4a3729; margin-top:0;">📖 ${isSpanish ? 'Escritura' : 'Scripture'}</h3>
                             <p><strong>${isSpanish ? t.verse_es : t.verse}</strong></p>
                             <p><em>"${isSpanish ? t.text_es : t.text}"</em></p>
                             
@@ -923,11 +1189,15 @@
             
             if (!found) {
                 output = `
-                <div>
+                <div style="padding:15px;">
                     <p>${isSpanish ? 'Aún no tengo respuesta. Temas disponibles:' : 'No answer yet. Available topics:'}</p>
                     <p>• ${isSpanish ? 'Lujuria' : 'Lust'}<br>
                        • ${isSpanish ? 'Enojo' : 'Anger'}<br>
-                       • ${isSpanish ? 'Fracaso' : 'Failure'}</p>
+                       • ${isSpanish ? 'Fracaso' : 'Failure'}<br>
+                       • ${isSpanish ? 'Perdón' : 'Forgiveness'}<br>
+                       • ${isSpanish ? 'Celos' : 'Jealousy'}<br>
+                       • ${isSpanish ? 'Soledad' : 'Loneliness'}<br>
+                       • ${isSpanish ? 'Propósito' : 'Purpose'}</p>
                 </div>
                 `;
             }
@@ -935,96 +1205,123 @@
             resultDiv.innerHTML = output;
         }
 
-        // Bible books and chapter counts (simplified for demo)
-        const bibleBooks = ["Genesis", "Exodus", "Psalm", "Proverbs", "Isaiah", "Matthew", "Mark", "Luke", "John", "Romans"];
-        const bibleBooksSpanish = ["Génesis", "Éxodo", "Salmos", "Proverbios", "Isaías", "Mateo", "Marcos", "Lucas", "Juan", "Romanos"];
-        
-        const chapterCounts = {
-            "Genesis": 50, "Exodus": 40, "Psalm": 150, "Proverbs": 31, "Isaiah": 66,
-            "Matthew": 28, "Mark": 16, "Luke": 24, "John": 21, "Romans": 16
-        };
-
-        function loadBooks() {
-            const isSpanish = document.body.classList.contains('spanish');
-            const books = isSpanish ? bibleBooksSpanish : bibleBooks;
+        // ============= UTILITY FUNCTIONS =============
+        function updateDate() {
+            const today = new Date();
+            const options = { month: 'short', day: 'numeric', year: 'numeric' };
+            document.getElementById('todayDate').textContent = today.toLocaleDateString('en-US', options);
             
-            let output = `<div class="book-grid">`;
-            for (let book of books) {
-                output += `<button onclick="loadChapters('${book}')">${book}</button>`;
+            // Random verse of the day
+            const verses = [
+                "John 3:16", "Psalm 23:1", "Philippians 4:13", "Romans 8:28", 
+                "Jeremiah 29:11", "Proverbs 3:5", "Isaiah 40:31", "Joshua 1:9"
+            ];
+            document.getElementById('verseOfDay').textContent = verses[Math.floor(Math.random() * verses.length)];
+            
+            // Set completion date (30 days from now)
+            const completion = new Date();
+            completion.setDate(completion.getDate() + 30);
+            document.getElementById('completionDate').textContent = completion.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        }
+
+        function selectPlan(days) {
+            document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const completion = new Date();
+            completion.setDate(completion.getDate() + days);
+            document.getElementById('completionDate').textContent = completion.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        }
+
+        // ============= SETTINGS FUNCTIONS =============
+        function toggleSettings() {
+            document.getElementById('settingsPanel').classList.toggle('open');
+        }
+
+        function setTheme(theme) {
+            document.body.classList.remove('dark-mode');
+            if (theme === 'dark') document.body.classList.add('dark-mode');
+            
+            document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`theme${theme.charAt(0).toUpperCase() + theme.slice(1)}`).classList.add('active');
+            localStorage.setItem('bibleAppTheme', theme);
+        }
+
+        function setFontSize(size) {
+            document.body.classList.remove('font-small', 'font-medium', 'font-large');
+            document.body.classList.add(`font-${size}`);
+            
+            document.querySelectorAll('[id^="font"]').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`font${size.charAt(0).toUpperCase() + size.slice(1)}`).classList.add('active');
+            localStorage.setItem('bibleAppFontSize', size);
+        }
+
+        function setLanguage(lang) {
+            if (lang === 'es') {
+                document.body.classList.add('spanish');
+            } else {
+                document.body.classList.remove('spanish');
             }
-            output += `</div>`;
-            document.getElementById("readerContent").innerHTML = output;
-        }
-
-        function loadChapters(book) {
-            const isSpanish = document.body.classList.contains('spanish');
-            let englishBook = book;
-            if (isSpanish) {
-                const index = bibleBooksSpanish.indexOf(book);
-                if (index !== -1) englishBook = bibleBooks[index];
+            
+            document.getElementById('question').style.display = lang === 'en' ? 'block' : 'none';
+            document.getElementById('question-es').style.display = lang === 'es' ? 'block' : 'none';
+            document.getElementById('bibleSearch').style.display = lang === 'en' ? 'block' : 'none';
+            document.getElementById('bibleSearch-es').style.display = lang === 'es' ? 'block' : 'none';
+            
+            // Refresh current view with new language
+            if (document.getElementById('readerSection').classList.contains('active')) {
+                if (currentBook) {
+                    loadChapter(currentBook, currentChapter, currentDisplayBook);
+                } else {
+                    loadBooks();
+                }
             }
             
-            let output = `<button onclick="loadBooks()" style="margin:10px 0;">← ${isSpanish ? 'Volver' : 'Back'}</button>`;
-            output += `<h3>${book}</h3><div class="chapter-grid">`;
-            
-            for (let i = 1; i <= (chapterCounts[englishBook] || 10); i++) {
-                output += `<button onclick="loadChapter('${englishBook}', ${i}, '${book}')">${i}</button>`;
+            localStorage.setItem('bibleAppLanguage', lang);
+        }
+
+        function toggleLanguage() {
+            if (document.body.classList.contains('spanish')) {
+                setLanguage('en');
+            } else {
+                setLanguage('es');
             }
-            output += `</div>`;
-            document.getElementById("readerContent").innerHTML = output;
         }
 
-        function loadChapter(book, chapter, displayBook) {
-            const isSpanish = document.body.classList.contains('spanish');
-            
-            let output = `<button onclick="loadChapters('${displayBook}')" style="margin:10px 0;">← ${isSpanish ? 'Volver' : 'Back'}</button>`;
-            output += `<h3>${displayBook} ${chapter}</h3>`;
-            output += `<div id="chapter-text" style="max-height:400px; overflow-y:auto;">`;
-            output += `<p class="loading">${isSpanish ? 'Cargando' : 'Loading'}...</p>`;
-            output += `</div>`;
-            
-            document.getElementById("readerContent").innerHTML = output;
-            
-            fetch(`https://bible-api.com/${book}+${chapter}?translation=kjv`)
-                .then(response => response.json())
-                .then(data => {
-                    let versesOutput = "";
-                    if (data.verses) {
-                        data.verses.forEach(verse => {
-                            versesOutput += `<p><strong>${verse.verse}</strong> ${verse.text}</p>`;
-                        });
-                    }
-                    document.getElementById("chapter-text").innerHTML = versesOutput;
-                })
-                .catch(() => {
-                    document.getElementById("chapter-text").innerHTML = "<p>Error loading chapter</p>";
-                });
+        function setCustomBackground(color) {
+            document.body.style.background = color;
+            localStorage.setItem('bibleAppCustomBg', color);
         }
 
-        function searchBible() {
-            const isSpanish = document.body.classList.contains('spanish');
-            let word = isSpanish ? 
-                document.getElementById("bibleSearch-es").value.toLowerCase() : 
-                document.getElementById("bibleSearch").value.toLowerCase();
-            
-            document.getElementById("bibleResult").innerHTML = `<p class="loading">${isSpanish ? 'Buscando...' : 'Searching...'}</p>`;
-            
-            fetch(`https://bible-api.com/${encodeURIComponent(word)}?translation=kjv`)
-                .then(response => response.json())
-                .then(data => {
-                    let output = "";
-                    if (data.verses && data.verses.length > 0) {
-                        data.verses.slice(0, 5).forEach(verse => {
-                            output += `<p><strong>${verse.book} ${verse.chapter}:${verse.verse}</strong><br>${verse.text}</p><hr>`;
-                        });
-                    } else {
-                        output = `<p>${isSpanish ? 'No se encontraron versículos' : 'No verses found'}</p>`;
-                    }
-                    document.getElementById("bibleResult").innerHTML = output;
-                });
+        function resetSettings() {
+            setTheme('default');
+            setFontSize('medium');
+            setLanguage('en');
+            document.body.style.background = '';
+            document.getElementById('bgColorPicker').value = '#d9c8a9';
+            document.getElementById('brightnessSlider').value = '1';
+            localStorage.clear();
         }
 
-        // Initialize
+        // Load saved settings
+        function loadSavedSettings() {
+            const savedTheme = localStorage.getItem('bibleAppTheme');
+            if (savedTheme) setTheme(savedTheme);
+            
+            const savedFontSize = localStorage.getItem('bibleAppFontSize');
+            if (savedFontSize) setFontSize(savedFontSize);
+            
+            const savedLanguage = localStorage.getItem('bibleAppLanguage');
+            if (savedLanguage) setLanguage(savedLanguage);
+            
+            const savedBg = localStorage.getItem('bibleAppCustomBg');
+            if (savedBg) {
+                document.body.style.background = savedBg;
+                document.getElementById('bgColorPicker').value = savedBg;
+            }
+        }
+
+        // Initialize on page load
         window.onload = function() {
             updateDate();
             loadSavedSettings();
