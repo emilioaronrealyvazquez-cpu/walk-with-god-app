@@ -17,7 +17,8 @@
 <p>Choose what you want to do</p>
 
 <button onclick="showAsk()">Ask a Question</button>
-<button onclick="showBible()">Read the Bible</button>
+<button onclick="showBible()">Search the Bible</button>
+<button onclick="showReader()">Read the Bible</button>
 
 </div>
 
@@ -46,6 +47,18 @@
 <div id="bibleResult"></div>
 
 <button onclick="goHome()">Back</button>
+
+</div>
+
+<div id="readerSection" style="display:none">
+
+<h2>Read the Bible</h2>
+
+<div id="readerContent">
+    <p>Loading books...</p>
+</div>
+
+<button onclick="goHome()" style="margin-top:20px;">Back</button>
 
 </div>
 
