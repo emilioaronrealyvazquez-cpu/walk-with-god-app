@@ -31,6 +31,8 @@
             --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             --gold: #c9a959;
             --heaven-blue: #87CEEB;
+            --character: #4a6b8f;
+            --character-light: #6b8caf;
         }
 
         body {
@@ -289,6 +291,10 @@
             color: var(--text-light);
         }
 
+        .badge.character {
+            background: var(--character);
+        }
+
         /* Progress Bar */
         .progress-section {
             margin: 15px 0;
@@ -408,6 +414,12 @@
             font-weight: 600;
         }
 
+        .action-btn.character {
+            background: var(--character);
+            color: white;
+            border-color: var(--character-light);
+        }
+
         .action-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -423,6 +435,10 @@
 
         .action-btn.salvation:hover {
             background: #d4af37;
+        }
+
+        .action-btn.character:hover {
+            background: var(--character-light);
         }
 
         /* Bottom Navigation */
@@ -847,6 +863,16 @@
             color: white;
         }
 
+        .suggested-btn.character {
+            border-color: var(--character);
+            background: rgba(74, 107, 143, 0.1);
+        }
+
+        .suggested-btn.character:hover {
+            background: var(--character);
+            color: white;
+        }
+
         .answer-card {
             background: linear-gradient(135deg, rgba(139, 107, 79, 0.05), rgba(201, 169, 89, 0.05));
             border-left: 4px solid var(--primary);
@@ -870,6 +896,11 @@
             background: linear-gradient(135deg, rgba(201, 169, 89, 0.1), rgba(139, 107, 79, 0.05));
         }
 
+        .answer-card.character-info {
+            border-left: 4px solid var(--character);
+            background: linear-gradient(135deg, rgba(74, 107, 143, 0.1), rgba(139, 107, 79, 0.05));
+        }
+
         .answer-card h4 {
             color: var(--primary);
             margin-bottom: 10px;
@@ -885,6 +916,10 @@
 
         .answer-card.salvation h4 {
             color: #b8860b;
+        }
+
+        .answer-card.character-info h4 {
+            color: var(--character);
         }
 
         .answer-card .source-badge {
@@ -905,6 +940,10 @@
         .answer-card .source-badge.curated {
             background: var(--gold);
             color: var(--text-light);
+        }
+
+        .answer-card .source-badge.character {
+            background: var(--character);
         }
 
         .answer-card .verse {
@@ -944,6 +983,10 @@
             background: rgba(201, 169, 89, 0.15);
         }
 
+        .answer-card.character-info .guidance {
+            background: rgba(74, 107, 143, 0.1);
+        }
+
         .guidance-title {
             font-weight: 600;
             margin-bottom: 8px;
@@ -951,6 +994,30 @@
             display: flex;
             align-items: center;
             gap: 5px;
+        }
+
+        .character-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .character-detail-item {
+            background: rgba(255, 255, 255, 0.5);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .character-detail-label {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        .character-detail-value {
+            font-weight: 600;
+            font-size: 16px;
         }
 
         .ai-confidence {
@@ -996,6 +1063,75 @@
             line-height: 1.8;
         }
 
+        /* Personal Notes Section */
+        .personal-notes-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(139, 107, 79, 0.05);
+            border-radius: 8px;
+            border: 1px dashed var(--primary-light);
+        }
+
+        .personal-notes-section h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .personal-notes-section textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--primary-light);
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 10px;
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .notes-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .notes-actions button {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid var(--primary-light);
+            border-radius: 30px;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .notes-actions button:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .previous-notes {
+            margin-top: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .note-item-small {
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .note-item-small .note-date {
+            font-size: 11px;
+            opacity: 0.6;
+            margin-top: 5px;
+            text-align: right;
+        }
+
         .related-topics {
             margin-top: 15px;
             padding-top: 15px;
@@ -1026,6 +1162,11 @@
 
         .related-topic.ai:hover {
             background: var(--ai);
+            color: white;
+        }
+
+        .related-topic.character:hover {
+            background: var(--character);
             color: white;
         }
 
@@ -1135,6 +1276,10 @@
 
             .search-mode-toggle {
                 flex-direction: column;
+            }
+
+            .character-details {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -1544,22 +1689,23 @@
                 </div>
             </div>
 
-            <!-- Ask Section - HYBRID AI + CURATED -->
+            <!-- Ask Section - ENHANCED with Character Info and Personal Notes -->
             <div id="askSection" class="content-section">
                 <div class="card">
                     <div class="ask-header">
                         <h2>Ask God's Word</h2>
-                        <p>Find biblical answers to life's toughest questions</p>
+                        <p>Find biblical answers, learn about people, and record your thoughts</p>
                     </div>
                     
                     <!-- Search Mode Toggle -->
                     <div class="search-mode-toggle">
-                        <button class="mode-btn active" onclick="setSearchMode('hybrid')" id="modeHybridBtn">🌐 Hybrid (Best)</button>
+                        <button class="mode-btn active" onclick="setSearchMode('hybrid')" id="modeHybridBtn">🌐 Hybrid</button>
                         <button class="mode-btn" onclick="setSearchMode('curated')" id="modeCuratedBtn">📚 Curated</button>
-                        <button class="mode-btn" onclick="setSearchMode('ai')" id="modeAIBtn">🤖 AI Search</button>
+                        <button class="mode-btn" onclick="setSearchMode('ai')" id="modeAIBtn">🤖 AI</button>
+                        <button class="mode-btn" onclick="setSearchMode('character')" id="modeCharacterBtn">👤 Characters</button>
                     </div>
                     
-                    <textarea id="question" rows="4" placeholder="e.g., 'How do I get to heaven?', 'What does the Bible say about anxiety?', 'How do I forgive someone?'" style="width:100%; padding:15px; margin:10px 0; border:2px solid var(--primary-light); border-radius:8px; font-size:16px;"></textarea>
+                    <textarea id="question" rows="3" placeholder="Ask about a topic, person, or question..." style="width:100%; padding:15px; margin:10px 0; border:2px solid var(--primary-light); border-radius:8px; font-size:16px;"></textarea>
                     
                     <div class="action-row">
                         <button class="action-btn primary" onclick="answerQuestion()" style="flex:2;">Get Answers</button>
@@ -1568,21 +1714,34 @@
                     
                     <!-- Suggested Questions -->
                     <div style="margin: 20px 0;">
-                        <p style="margin-bottom:10px; opacity:0.8;">Popular questions:</p>
+                        <p style="margin-bottom:10px; opacity:0.8;">Popular topics & people:</p>
                         <div class="suggested-questions">
                             <button class="suggested-btn salvation" onclick="setQuestion('How do I get to heaven?')">✝️ Salvation</button>
-                            <button class="suggested-btn salvation" onclick="setQuestion('What must I do to be saved?')">✝️ Be Saved</button>
-                            <button class="suggested-btn" onclick="setQuestion('How do I overcome anxiety?')">Anxiety</button>
-                            <button class="suggested-btn" onclick="setQuestion('How do I forgive someone who hurt me?')">Forgiveness</button>
-                            <button class="suggested-btn" onclick="setQuestion('Why do I feel lonely?')">Loneliness</button>
-                            <button class="suggested-btn" onclick="setQuestion('How do I find my purpose?')">Purpose</button>
-                            <button class="suggested-btn" onclick="setQuestion('How do I deal with anger?')">Anger</button>
-                            <button class="suggested-btn ai" onclick="setQuestion('What does the Bible say about work?')">Work</button>
+                            <button class="suggested-btn character" onclick="setQuestion('Who was David?')">👑 King David</button>
+                            <button class="suggested-btn" onclick="setQuestion('How do I overcome anxiety?')">😰 Anxiety</button>
+                            <button class="suggested-btn character" onclick="setQuestion('Who was Moses?')">📜 Moses</button>
+                            <button class="suggested-btn" onclick="setQuestion('How do I forgive someone?')">💝 Forgiveness</button>
+                            <button class="suggested-btn character" onclick="setQuestion('Who was Paul?')">✉️ Apostle Paul</button>
+                            <button class="suggested-btn" onclick="setQuestion('How do I find my purpose?')">🎯 Purpose</button>
+                            <button class="suggested-btn character" onclick="setQuestion('Who was Peter?')">⚓ Peter</button>
+                            <button class="suggested-btn" onclick="setQuestion('How do I deal with anger?')">😤 Anger</button>
+                            <button class="suggested-btn character" onclick="setQuestion('Who was Abraham?')">🌟 Abraham</button>
                         </div>
                     </div>
                     
                     <!-- Answer Results -->
                     <div id="answerResult" style="margin-top:20px;"></div>
+                    
+                    <!-- Personal Notes Section (appears after answers) -->
+                    <div id="personalNotesSection" class="personal-notes-section" style="display:none;">
+                        <h4>📝 Your Personal Notes</h4>
+                        <textarea id="personalNote" placeholder="Write your thoughts, reflections, or prayers about this topic..."></textarea>
+                        <div class="notes-actions">
+                            <button onclick="savePersonalNote()">Save Note</button>
+                            <button onclick="clearPersonalNote()">Clear</button>
+                        </div>
+                        <div id="previousNotes" class="previous-notes"></div>
+                    </div>
                     
                     <button class="action-btn" onclick="showHome()" style="margin-top:20px;">← Back to Home</button>
                 </div>
@@ -1639,15 +1798,112 @@
 
         // ==================== HYBRID SEARCH SYSTEM ====================
         
-        // Search mode: 'hybrid', 'curated', or 'ai'
+        // Search mode: 'hybrid', 'curated', 'ai', or 'character'
         let searchMode = localStorage.getItem('searchMode') || 'hybrid';
         let confidenceThreshold = parseFloat(localStorage.getItem('confidenceThreshold')) || 0.6;
         
         // Simple semantic cache
         let semanticCache = JSON.parse(localStorage.getItem('semanticCache')) || {};
         
+        // Personal notes storage
+        let personalNotes = JSON.parse(localStorage.getItem('personalNotes')) || {};
+        
+        // ==================== BIBLICAL CHARACTER DATABASE ====================
+        const biblicalCharacters = {
+            david: {
+                keywords: ["david", "king david", "shepherd boy", "goliath", "psalmist"],
+                name: "King David",
+                title: "Shepherd, Warrior, King, Psalmist",
+                era: "c. 1040-970 BC",
+                meaning: "Beloved",
+                parents: "Jesse (father)",
+                spouse: "Michal, Abigail, Bathsheba, and others",
+                children: "Solomon, Absalom, Amnon, and others",
+                story: "David was the second king of Israel, described as 'a man after God's own heart.' He started as a humble shepherd boy who defeated the giant Goliath with a sling and stone. He united Israel, established Jerusalem as the capital, and brought the Ark of the Covenant there. Despite his great faith, he also committed serious sins, including adultery with Bathsheba and arranging the death of her husband Uriah. When confronted by the prophet Nathan, David repented deeply, and God forgave him. He wrote many of the Psalms.",
+                significance: "David is central to biblical history as the founder of a royal dynasty. God promised that his throne would endure forever - a promise fulfilled in Jesus Christ, who is often called the 'Son of David.'",
+                verses: [
+                    { ref: "1 Samuel 16:7", text: "The Lord does not look at the things people look at. People look at the outward appearance, but the Lord looks at the heart." },
+                    { ref: "1 Samuel 17:45", text: "David said to the Philistine, 'You come against me with sword and spear and javelin, but I come against you in the name of the Lord Almighty.'" },
+                    { ref: "Psalm 51:1-2", text: "Have mercy on me, O God, according to your unfailing love; according to your great compassion blot out my transgressions. Wash away all my iniquity and cleanse me from my sin." },
+                    { ref: "Acts 13:22", text: "After removing Saul, he made David their king. God testified concerning him: 'I have found David son of Jesse, a man after my own heart; he will do everything I want him to do.'" }
+                ],
+                lessons: "David's life teaches us that God values the heart above all else, that faith can overcome giants, that sincere repentance brings restoration, and that God's grace covers even our greatest failures."
+            },
+            moses: {
+                keywords: ["moses", "prophet", "law", "exodus", "ten commandments", "burning bush"],
+                name: "Moses",
+                title: "Prophet, Lawgiver, Leader",
+                era: "c. 1526-1406 BC",
+                meaning: "Drawn out (of water)",
+                parents: "Amram and Jochebed",
+                spouse: "Zipporah",
+                children: "Gershom and Eliezer",
+                story: "Moses was born to Hebrew slaves in Egypt but was adopted by Pharaoh's daughter. As an adult, he killed an Egyptian taskmaster and fled to Midian, where God appeared to him in a burning bush. God sent him back to Egypt to demand freedom for His people. Through ten plagues, the Exodus, and the parting of the Red Sea, Moses led Israel out of bondage. At Mount Sinai, he received the Ten Commandments and the Law. He led the people through 40 years in the wilderness, though he was not permitted to enter the Promised Land due to his own disobedience. He saw it from Mount Nebo before he died, and God personally buried him.",
+                significance: "Moses was the greatest prophet in the Old Testament, through whom God gave the Law. He appears with Elijah at Jesus' transfiguration, representing the Law and the Prophets.",
+                verses: [
+                    { ref: "Exodus 3:4-5", text: "When the Lord saw that he had gone over to look, God called to him from within the bush, 'Moses! Moses!' And Moses said, 'Here I am.' 'Do not come any closer,' God said. 'Take off your sandals, for the place where you are standing is holy ground.'" },
+                    { ref: "Exodus 14:13-14", text: "Moses answered the people, 'Do not be afraid. Stand firm and you will see the deliverance the Lord will bring you today. The Egyptians you see today you will never see again. The Lord will fight for you; you need only to be still.'" },
+                    { ref: "Deuteronomy 34:10", text: "Since then, no prophet has risen in Israel like Moses, whom the Lord knew face to face." }
+                ],
+                lessons: "Moses shows us that God can use anyone, despite their past or perceived inadequacies. He teaches us to approach God with reverence, to intercede for others, and to trust God even when we don't see the full picture."
+            },
+            paul: {
+                keywords: ["paul", "saul", "apostle", "missionary", "tarsus", "letters", "epistles"],
+                name: "Apostle Paul",
+                title: "Apostle to the Gentiles, Missionary, Author",
+                era: "c. 5-67 AD",
+                meaning: "Small/humble",
+                parents: "Unknown (a Roman citizen from Tarsus)",
+                occupation: "Tentmaker, Rabbi, Missionary",
+                story: "Originally named Saul, he was a devout Pharisee who fiercely persecuted the early church. On the road to Damascus to arrest Christians, he encountered the risen Jesus in a blinding light. He was converted, baptized, and became Christianity's most passionate missionary. He undertook three missionary journeys across the Roman Empire, planting churches and spreading the Gospel. He wrote 13 New Testament letters (epistles) that form the foundation of Christian theology. He was imprisoned multiple times and eventually martyred in Rome under Nero.",
+                significance: "Paul wrote nearly half the New Testament and shaped Christian theology more than any other figure besides Jesus. His teachings on grace, faith, and the role of the Law are foundational.",
+                verses: [
+                    { ref: "Acts 9:3-6", text: "As he neared Damascus on his journey, suddenly a light from heaven flashed around him. He fell to the ground and heard a voice say to him, 'Saul, Saul, why do you persecute me?' 'Who are you, Lord?' Saul asked. 'I am Jesus, whom you are persecuting,' he replied." },
+                    { ref: "Philippians 3:7-8", text: "But whatever were gains to me I now consider loss for the sake of Christ. What is more, I consider everything a loss because of the surpassing worth of knowing Christ Jesus my Lord." },
+                    { ref: "2 Timothy 4:7", text: "I have fought the good fight, I have finished the race, I have kept the faith." }
+                ],
+                lessons: "Paul's life demonstrates that no one is beyond God's grace, that a transformed life is the greatest testimony, that suffering for Christ has purpose, and that one person can impact the world for generations."
+            },
+            peter: {
+                keywords: ["peter", "simon", "cephas", "apostle", "rock", "fisherman"],
+                name: "Apostle Peter",
+                title: "Fisherman, Apostle, Leader of the Early Church",
+                era: "c. 1-67 AD",
+                meaning: "Rock",
+                parents: "Jonah (John)",
+                occupation: "Fisherman",
+                story: "Peter was a fisherman on the Sea of Galilee when Jesus called him to be a disciple. He was impulsive, outspoken, and often acted as the spokesman for the twelve. He was the first to declare Jesus as the Messiah, yet he also denied knowing Jesus three times on the night of His trial. After the resurrection, Jesus restored him, asking three times 'Do you love me?' He became a bold leader of the early church, preaching at Pentecost and performing miracles. According to tradition, he was crucified upside down in Rome because he felt unworthy to die in the same manner as his Lord.",
+                significance: "Peter was the leading apostle during Jesus' ministry and the early church. He wrote two New Testament letters (1 & 2 Peter). Jesus called him the 'rock' on which He would build His church.",
+                verses: [
+                    { ref: "Matthew 16:16-18", text: "Simon Peter answered, 'You are the Messiah, the Son of the living God.' Jesus replied, 'Blessed are you, Simon son of Jonah, for this was not revealed to you by flesh and blood, but by my Father in heaven. And I tell you that you are Peter, and on this rock I will build my church.'" },
+                    { ref: "Luke 22:61-62", text: "The Lord turned and looked straight at Peter. Then Peter remembered the word the Lord had spoken to him: 'Before the rooster crows today, you will disown me three times.' And he went outside and wept bitterly." },
+                    { ref: "John 21:15-17", text: "When they had finished eating, Jesus said to Simon Peter, 'Simon son of John, do you love me more than these?' 'Yes, Lord,' he said, 'you know that I love you.' Jesus said, 'Feed my lambs.'" },
+                    { ref: "Acts 2:41", text: "Those who accepted his message were baptized, and about three thousand were added to their number that day." }
+                ],
+                lessons: "Peter teaches us that failure is not final, that sincere repentance leads to restoration, that God can use impulsive people, and that ordinary people can do extraordinary things through the Holy Spirit."
+            },
+            abraham: {
+                keywords: ["abraham", "abram", "father of faith", "covenant", "patriarch"],
+                name: "Abraham",
+                title: "Father of the Faithful, Patriarch",
+                era: "c. 2000 BC",
+                meaning: "Father of many",
+                parents: "Terah",
+                spouse: "Sarah (Sarai)",
+                children: "Ishmael (with Hagar), Isaac (with Sarah)",
+                story: "Abraham (originally Abram) was called by God to leave his homeland and go to a land God would show him. God promised to make him a great nation, bless him, and through him bless all peoples. Despite being 75 years old and childless, Abraham believed God's promise. His faith was tested severely when God asked him to sacrifice his promised son Isaac - and he obeyed, trusting God would provide. At the last moment, God provided a ram instead. Abraham is revered as the father of the Jewish nation and the model of faith for all believers.",
+                significance: "Abraham is the father of three major world religions: Judaism, Christianity, and Islam. The Abrahamic covenant - God's promise to bless all nations through him - is fulfilled in Jesus Christ.",
+                verses: [
+                    { ref: "Genesis 15:6", text: "Abram believed the Lord, and he credited it to him as righteousness." },
+                    { ref: "Hebrews 11:8-10", text: "By faith Abraham, when called to go to a place he would later receive as his inheritance, obeyed and went, even though he did not know where he was going." },
+                    { ref: "Romans 4:3", text: "What does Scripture say? 'Abraham believed God, and it was credited to him as righteousness.'" },
+                    { ref: "James 2:23", text: "And the scripture was fulfilled that says, 'Abraham believed God, and it was credited to him as righteousness,' and he was called God's friend." }
+                ],
+                lessons: "Abraham's life teaches us radical obedience, trusting God's promises even when they seem impossible, that faith is credited as righteousness, and that God's timing is perfect."
+            }
+        };
+
         // Pre-computed Bible verses for semantic search
-        // This is a simplified version - in production, you'd have full KJV
         const bibleVersesForSearch = [
             { ref: "John 3:16", text: "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life." },
             { ref: "John 14:6", text: "Jesus answered, 'I am the way and the truth and the life. No one comes to the Father except through me.'" },
@@ -1802,6 +2058,63 @@
             return answer;
         }
 
+        // Character info function
+        function getCharacterInfo(question) {
+            const q = question.toLowerCase();
+            let matchedCharacter = null;
+            let characterKey = null;
+            
+            for (let [key, character] of Object.entries(biblicalCharacters)) {
+                const match = character.keywords.some(keyword => q.includes(keyword));
+                if (match) {
+                    matchedCharacter = character;
+                    characterKey = key;
+                    break;
+                }
+            }
+            
+            if (!matchedCharacter) return null;
+            
+            let versesHtml = '';
+            matchedCharacter.verses.forEach(v => {
+                versesHtml += `<div class="verse">"${v.text}" — <strong>${v.ref}</strong></div>`;
+            });
+            
+            return {
+                html: `
+                    <div class="answer-card character-info">
+                        <h4>👤 ${matchedCharacter.name} <span class="source-badge character">Biblical Character</span></h4>
+                        <div class="character-details">
+                            <div class="character-detail-item">
+                                <div class="character-detail-label">Title</div>
+                                <div class="character-detail-value">${matchedCharacter.title}</div>
+                            </div>
+                            <div class="character-detail-item">
+                                <div class="character-detail-label">Era</div>
+                                <div class="character-detail-value">${matchedCharacter.era}</div>
+                            </div>
+                            <div class="character-detail-item">
+                                <div class="character-detail-label">Name Meaning</div>
+                                <div class="character-detail-value">${matchedCharacter.meaning}</div>
+                            </div>
+                            <div class="character-detail-item">
+                                <div class="character-detail-label">Family</div>
+                                <div class="character-detail-value">${matchedCharacter.parents || matchedCharacter.spouse ? 'See details' : 'Various'}</div>
+                            </div>
+                        </div>
+                        <div class="explanation"><strong>Story:</strong> ${matchedCharacter.story}</div>
+                        <div class="explanation"><strong>Significance:</strong> ${matchedCharacter.significance}</div>
+                        <div class="guidance">
+                            <div class="guidance-title">📖 Key Scriptures</div>
+                            ${versesHtml}
+                            <div style="margin-top:10px;"><strong>✨ Lessons:</strong> ${matchedCharacter.lessons}</div>
+                        </div>
+                    </div>
+                `,
+                characterKey: characterKey
+            };
+        }
+
         // Curated answers database (your existing system)
         const curatedAnswers = [
             // SALVATION
@@ -1904,6 +2217,70 @@
             }
         ];
 
+        // ==================== PERSONAL NOTES FUNCTIONS ====================
+        function loadPersonalNotesForTopic(topicKey) {
+            if (!currentUser) return;
+            
+            const notes = personalNotes[currentUser.id]?.[topicKey] || [];
+            const container = document.getElementById('previousNotes');
+            
+            if (notes.length === 0) {
+                container.innerHTML = '<p style="text-align:center; opacity:0.7;">No notes yet. Write your thoughts above.</p>';
+                return;
+            }
+            
+            let html = '';
+            notes.slice(0, 5).forEach(note => {
+                html += `
+                    <div class="note-item-small">
+                        ${note.text}
+                        <div class="note-date">${new Date(note.date).toLocaleDateString()}</div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function savePersonalNote() {
+            if (!currentUser) {
+                showToast('Please sign in to save notes');
+                showLogin();
+                return;
+            }
+            
+            const noteText = document.getElementById('personalNote').value.trim();
+            if (!noteText) return;
+            
+            const currentTopic = document.getElementById('answerResult').getAttribute('data-current-topic') || 'general';
+            
+            if (!personalNotes[currentUser.id]) {
+                personalNotes[currentUser.id] = {};
+            }
+            if (!personalNotes[currentUser.id][currentTopic]) {
+                personalNotes[currentUser.id][currentTopic] = [];
+            }
+            
+            personalNotes[currentUser.id][currentTopic].unshift({
+                text: noteText,
+                date: new Date().toISOString()
+            });
+            
+            // Keep only last 10 notes
+            if (personalNotes[currentUser.id][currentTopic].length > 10) {
+                personalNotes[currentUser.id][currentTopic].pop();
+            }
+            
+            localStorage.setItem('personalNotes', JSON.stringify(personalNotes));
+            document.getElementById('personalNote').value = '';
+            loadPersonalNotesForTopic(currentTopic);
+            showToast('Note saved');
+        }
+
+        function clearPersonalNote() {
+            document.getElementById('personalNote').value = '';
+        }
+
         // Settings functions
         function setSearchMode(mode) {
             searchMode = mode;
@@ -1913,6 +2290,7 @@
             document.getElementById('modeHybridBtn').classList.remove('active');
             document.getElementById('modeCuratedBtn').classList.remove('active');
             document.getElementById('modeAIBtn').classList.remove('active');
+            document.getElementById('modeCharacterBtn').classList.remove('active');
             
             if (mode === 'hybrid') {
                 document.getElementById('modeHybridBtn').classList.add('active');
@@ -1920,9 +2298,12 @@
             } else if (mode === 'curated') {
                 document.getElementById('modeCuratedBtn').classList.add('active');
                 showToast('📚 Curated mode: Trusted answers only');
-            } else {
+            } else if (mode === 'ai') {
                 document.getElementById('modeAIBtn').classList.add('active');
                 showToast('🤖 AI mode: Semantic search');
+            } else if (mode === 'character') {
+                document.getElementById('modeCharacterBtn').classList.add('active');
+                showToast('👤 Character mode: Learn about Bible people');
             }
         }
 
@@ -1948,22 +2329,48 @@
             }
             
             let output = '';
+            let topicKey = 'general';
             
             if (searchMode === 'curated') {
                 // Curated only
                 output = getCuratedAnswer(question);
+                topicKey = 'curated';
             } else if (searchMode === 'ai') {
                 // AI only
                 output = getAIAnswer(question);
+                topicKey = 'ai';
+            } else if (searchMode === 'character') {
+                // Character mode
+                const characterInfo = getCharacterInfo(question);
+                if (characterInfo) {
+                    output = characterInfo.html;
+                    topicKey = characterInfo.characterKey;
+                } else {
+                    output = '<p>No character information found. Try asking about David, Moses, Paul, Peter, or Abraham.</p>';
+                }
             } else {
-                // Hybrid: try curated first, fall back to AI
-                output = getCuratedAnswer(question);
-                if (!output) {
-                    output = getAIAnswer(question);
+                // Hybrid: try character first, then curated, then AI
+                const characterInfo = getCharacterInfo(question);
+                if (characterInfo) {
+                    output = characterInfo.html;
+                    topicKey = characterInfo.characterKey;
+                } else {
+                    output = getCuratedAnswer(question);
+                    topicKey = 'curated';
+                    if (!output) {
+                        output = getAIAnswer(question);
+                        topicKey = 'ai';
+                    }
                 }
             }
             
-            document.getElementById('answerResult').innerHTML = output || '<p>No relevant answers found. Try rephrasing your question or switch to AI mode.</p>';
+            document.getElementById('answerResult').innerHTML = output || '<p>No relevant answers found. Try rephrasing your question or switch to a different mode.</p>';
+            document.getElementById('answerResult').setAttribute('data-current-topic', topicKey);
+            
+            // Show personal notes section and load notes for this topic
+            document.getElementById('personalNotesSection').style.display = 'block';
+            loadPersonalNotesForTopic(topicKey);
+            
             document.getElementById('answerResult').scrollIntoView({ behavior: 'smooth' });
         }
 
@@ -2026,6 +2433,7 @@
         function clearQuestion() {
             document.getElementById('question').value = '';
             document.getElementById('answerResult').innerHTML = '';
+            document.getElementById('personalNotesSection').style.display = 'none';
         }
 
         // ==================== USER AUTHENTICATION (simplified) ====================
