@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Discipline Forge - Due Dates & Deadlines</title>
+    <title>Discipline Forge - Weekly Due Dates</title>
     <style>
         * {
             box-sizing: border-box;
@@ -19,7 +19,7 @@
             align-items: center;
         }
 
-        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap');
 
         .app-container {
             max-width: 700px;
@@ -27,8 +27,8 @@
             background: #0a0000;
             border-radius: 32px;
             padding: 20px;
-            box-shadow: 0 0 30px rgba(180, 40, 40, 0.25);
-            border: 1px solid #8b1a1a;
+            box-shadow: 0 0 40px rgba(255, 0, 0, 0.3), 0 0 20px rgba(255, 0, 0, 0.2);
+            border: 1px solid #ff2222;
             font-family: 'Inter', 'Playfair Display', system-ui, sans-serif;
         }
 
@@ -36,19 +36,20 @@
             font-family: 'Playfair Display', serif;
             font-size: 1.9rem;
             margin: 0;
-            color: #cc2222;
-            text-shadow: 0 0 8px rgba(200, 30, 30, 0.3);
+            color: #ffffff;
+            text-shadow: 0 0 15px #ff0000, 0 0 8px #ff0000, 0 0 3px #ff4444;
             font-weight: 600;
             font-style: italic;
             text-align: center;
         }
 
         .sub {
-            color: #aa5555;
+            color: #ffaaaa;
             font-size: 0.7rem;
             margin-top: 4px;
             text-align: center;
             font-family: 'Inter', sans-serif;
+            text-shadow: 0 0 3px #ff0000;
         }
 
         .top-bar {
@@ -59,7 +60,8 @@
             padding: 10px 16px;
             border-radius: 40px;
             margin-bottom: 20px;
-            border: 1px solid #8b1a1a;
+            border: 1px solid #ff2222;
+            box-shadow: 0 0 8px rgba(255, 0, 0, 0.2);
         }
 
         .date-badge {
@@ -68,19 +70,27 @@
             border-radius: 30px;
             font-size: 0.8rem;
             font-weight: 500;
-            color: #dd5555;
-            border: 1px solid #8b1a1a;
+            color: #ffffff;
+            border: 1px solid #ff4444;
+            text-shadow: 0 0 2px #ff0000;
         }
 
         .reset-btn {
             background: #200000;
-            border: 1px solid #8b1a1a;
+            border: 1px solid #ff4444;
             padding: 5px 14px;
             border-radius: 30px;
-            color: #dd7777;
+            color: #ffffff;
             font-weight: 500;
             font-size: 0.75rem;
             cursor: pointer;
+            transition: all 0.2s;
+            text-shadow: 0 0 2px #ff0000;
+        }
+
+        .reset-btn:hover {
+            background: #ff2222;
+            box-shadow: 0 0 12px #ff0000;
         }
 
         .tabs {
@@ -90,7 +100,7 @@
             background: #140000;
             padding: 6px;
             border-radius: 50px;
-            border: 1px solid #8b1a1a;
+            border: 1px solid #ff2222;
         }
 
         .tab {
@@ -101,14 +111,16 @@
             font-weight: 600;
             font-size: 0.85rem;
             cursor: pointer;
-            color: #aa6666;
+            color: #ffaaaa;
             font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
         }
 
         .tab.active {
-            background: #8b1a1a;
+            background: #ff2222;
             color: #ffffff;
-            box-shadow: 0 0 12px rgba(180, 40, 40, 0.4);
+            box-shadow: 0 0 15px #ff0000, 0 0 5px #ff0000;
+            text-shadow: 0 0 3px #ffffff;
         }
 
         .tab-content {
@@ -123,7 +135,8 @@
             border-radius: 24px;
             padding: 16px;
             margin-bottom: 20px;
-            border: 1px solid #8b1a1a;
+            border: 1px solid #ff2222;
+            box-shadow: 0 0 8px rgba(255, 0, 0, 0.15);
         }
 
         .input-group {
@@ -133,20 +146,85 @@
         .input-group label {
             font-size: 0.7rem;
             font-weight: 500;
-            color: #cc8888;
+            color: #ffaaaa;
             display: block;
             margin-bottom: 4px;
+            text-shadow: 0 0 2px #ff0000;
         }
 
         .input-group input, .input-group textarea, .input-group select {
             width: 100%;
             background: #0a0000;
-            border: 1px solid #8b1a1a;
+            border: 1px solid #ff4444;
             padding: 8px 12px;
             border-radius: 20px;
-            color: #dd8888;
+            color: #ffffff;
             font-size: 0.85rem;
             font-family: 'Inter', sans-serif;
+        }
+
+        .input-group input:focus, .input-group textarea:focus {
+            outline: none;
+            border-color: #ff0000;
+            box-shadow: 0 0 10px #ff0000;
+        }
+
+        .due-options {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .due-type-btn {
+            flex: 1;
+            background: #200000;
+            border: 1px solid #ff4444;
+            padding: 8px;
+            border-radius: 20px;
+            color: #ffaaaa;
+            cursor: pointer;
+            text-align: center;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+
+        .due-type-btn.active-due {
+            background: #ff2222;
+            color: white;
+            box-shadow: 0 0 10px #ff0000;
+            border-color: #ff0000;
+        }
+
+        .day-selector {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .day-btn {
+            background: #200000;
+            border: 1px solid #ff4444;
+            padding: 8px 4px;
+            border-radius: 20px;
+            color: #ffaaaa;
+            cursor: pointer;
+            text-align: center;
+            font-size: 0.7rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .day-btn.selected-day {
+            background: #ff2222;
+            color: white;
+            box-shadow: 0 0 10px #ff0000;
+            border-color: #ff0000;
+        }
+
+        .date-picker-group {
+            margin-bottom: 12px;
         }
 
         .custom-grid {
@@ -160,7 +238,7 @@
         }
 
         .add-btn {
-            background: #8b1a1a;
+            background: #ff2222;
             border: none;
             padding: 10px 20px;
             border-radius: 30px;
@@ -170,6 +248,14 @@
             color: #ffffff;
             width: 100%;
             transition: all 0.2s;
+            text-shadow: 0 0 3px rgba(0,0,0,0.5);
+            box-shadow: 0 0 8px rgba(255,0,0,0.5);
+        }
+
+        .add-btn:hover {
+            background: #ff4444;
+            box-shadow: 0 0 20px #ff0000;
+            transform: scale(1.01);
         }
 
         .exercises-list {
@@ -182,6 +268,18 @@
             padding-right: 4px;
         }
 
+        .exercises-list::-webkit-scrollbar {
+            width: 6px;
+        }
+        .exercises-list::-webkit-scrollbar-track {
+            background: #140000;
+        }
+        .exercises-list::-webkit-scrollbar-thumb {
+            background: #ff2222;
+            border-radius: 10px;
+            box-shadow: 0 0 5px #ff0000;
+        }
+
         .exercise-card {
             background: #140000;
             border-radius: 20px;
@@ -189,21 +287,23 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            border-left: 4px solid #cc3333;
-            border: 1px solid #8b1a1a;
-            position: relative;
+            border-left: 4px solid #ff3333;
+            border: 1px solid #ff3333;
+            transition: all 0.2s;
+            box-shadow: 0 0 5px rgba(255, 0, 0, 0.1);
         }
 
         .exercise-card.overdue {
             border-left-color: #ff0000;
             background: #1a0505;
-            box-shadow: 0 0 10px rgba(255,0,0,0.2);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.4), inset 0 0 5px rgba(255, 0, 0, 0.2);
         }
 
         .exercise-card.completed {
-            opacity: 0.65;
+            opacity: 0.6;
             border-left-color: #5a1a1a;
             background: #0a0000;
+            box-shadow: none;
         }
 
         .check-box {
@@ -216,14 +316,16 @@
             justify-content: center;
             cursor: pointer;
             font-size: 1.2rem;
-            color: #dd6666;
+            color: #ffffff;
             flex-shrink: 0;
-            border: 1px solid #8b1a1a;
+            border: 1px solid #ff4444;
+            transition: all 0.2s;
         }
 
         .check-box.checked {
-            background: #8b1a1a;
+            background: #ff2222;
             color: #ffffff;
+            box-shadow: 0 0 12px #ff0000;
         }
 
         .exercise-info {
@@ -233,12 +335,13 @@
         .exercise-name {
             font-weight: 600;
             font-size: 1rem;
-            color: #dd5555;
+            color: #ffffff;
+            text-shadow: 0 0 2px #ff0000;
         }
 
         .meta-info {
             font-size: 0.7rem;
-            color: #aa7777;
+            color: #ffaaaa;
             margin-top: 4px;
             display: flex;
             flex-wrap: wrap;
@@ -248,45 +351,56 @@
         .due-date {
             color: #ff8888;
             font-weight: 500;
+            text-shadow: 0 0 2px #ff0000;
         }
 
         .overdue-badge {
-            background: #8b1a1a;
+            background: #ff2222;
             color: white;
             padding: 2px 8px;
             border-radius: 12px;
             font-size: 0.65rem;
             font-weight: bold;
+            box-shadow: 0 0 5px #ff0000;
         }
 
         .delete-exercise {
             background: #200000;
-            border: 1px solid #8b1a1a;
-            color: #dd7777;
+            border: 1px solid #ff4444;
+            color: #ffffff;
             padding: 6px 12px;
             border-radius: 30px;
             cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .delete-exercise:hover {
+            background: #ff2222;
+            box-shadow: 0 0 10px #ff0000;
         }
 
         .empty-state {
             text-align: center;
-            color: #aa6666;
+            color: #ffaaaa;
             padding: 40px 20px;
+            text-shadow: 0 0 2px #ff0000;
         }
 
         .consequence-area {
             background: #0a0000;
             border-radius: 24px;
             padding: 16px;
-            border: 1px solid #8b1a1a;
+            border: 1px solid #ff2222;
             margin-top: 10px;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
         }
 
         .consequence-title {
             font-weight: 600;
             font-size: 0.85rem;
-            color: #dd5555;
+            color: #ff8888;
             margin-bottom: 10px;
+            text-shadow: 0 0 3px #ff0000;
         }
 
         #punishmentMessage {
@@ -294,8 +408,9 @@
             padding: 12px 16px;
             border-radius: 18px;
             font-size: 0.8rem;
-            color: #dd8888;
-            border: 1px solid #8b1a1a;
+            color: #ffcccc;
+            border: 1px solid #ff4444;
+            text-shadow: 0 0 2px #ff0000;
         }
 
         .action-buttons {
@@ -307,19 +422,25 @@
 
         .action-buttons button {
             background: #140000;
-            border: 1px solid #8b1a1a;
+            border: 1px solid #ff4444;
             padding: 6px 14px;
             border-radius: 30px;
             font-size: 0.7rem;
             cursor: pointer;
-            color: #dd7777;
+            color: #ffffff;
+            transition: all 0.2s;
+        }
+
+        .action-buttons button:hover {
+            background: #ff2222;
+            box-shadow: 0 0 10px #ff0000;
         }
 
         .settings-section {
             background: #140000;
             border-radius: 24px;
             padding: 18px;
-            border: 1px solid #8b1a1a;
+            border: 1px solid #ff2222;
             margin-bottom: 16px;
         }
 
@@ -327,10 +448,11 @@
             font-family: 'Playfair Display', serif;
             font-size: 1.1rem;
             font-weight: 600;
-            color: #dd5555;
+            color: #ffffff;
             margin-bottom: 16px;
-            border-bottom: 1px solid #8b1a1a;
+            border-bottom: 1px solid #ff4444;
             padding-bottom: 8px;
+            text-shadow: 0 0 3px #ff0000;
         }
 
         .setting-row {
@@ -348,7 +470,7 @@
         .setting-field label {
             font-size: 0.7rem;
             font-weight: 500;
-            color: #cc8888;
+            color: #ffaaaa;
             display: block;
             margin-bottom: 6px;
         }
@@ -356,32 +478,41 @@
         .setting-field select, .setting-field input {
             width: 100%;
             background: #0a0000;
-            border: 1px solid #8b1a1a;
+            border: 1px solid #ff4444;
             padding: 8px 12px;
             border-radius: 20px;
-            color: #dd8888;
+            color: #ffffff;
         }
 
         .danger-btn {
             background: #2a0505;
-            border: 1px solid #cc3333;
-            color: #ff8888;
+            border: 1px solid #ff3333;
+            color: #ffaaaa;
             padding: 10px 20px;
             border-radius: 30px;
             cursor: pointer;
             width: 100%;
+            transition: all 0.2s;
+        }
+
+        .danger-btn:hover {
+            background: #ff2222;
+            color: white;
+            box-shadow: 0 0 10px #ff0000;
         }
 
         .footer-note {
             font-size: 0.6rem;
             text-align: center;
             margin-top: 16px;
-            color: #884444;
+            color: #ff8888;
+            text-shadow: 0 0 2px #ff0000;
         }
 
         @media (max-width: 550px) {
             .app-container { padding: 14px; }
-            .meta-info { flex-direction: column; gap: 4px; }
+            .day-btn { font-size: 0.6rem; padding: 6px 2px; }
+            .due-type-btn { font-size: 0.7rem; }
         }
     </style>
 </head>
@@ -389,7 +520,7 @@
 <div class="app-container">
     <div class="header">
         <h1>⚔️ Discipline Forge ⚔️</h1>
-        <div class="sub">due dates · deadlines · consequences</div>
+        <div class="sub">weekly due dates · glowing consequences · forged in fire</div>
     </div>
 
     <div class="top-bar">
@@ -414,6 +545,29 @@
                 <label>⚠️ CUSTOM PUNISHMENT (optional)</label>
                 <textarea id="punishmentText" rows="1" placeholder="Leave blank for auto-generated"></textarea>
             </div>
+            
+            <!-- Due Date Selection Toggle -->
+            <div class="due-options">
+                <div class="due-type-btn" data-due-type="weekly">📅 Weekly (Day of Week)</div>
+                <div class="due-type-btn" data-due-type="specific">📆 Specific Date</div>
+            </div>
+            
+            <!-- Weekly Day Selector (Monday-Sunday) -->
+            <div id="weeklySelector" class="day-selector">
+                <div class="day-btn" data-day="Monday">Mon</div>
+                <div class="day-btn" data-day="Tuesday">Tue</div>
+                <div class="day-btn" data-day="Wednesday">Wed</div>
+                <div class="day-btn" data-day="Thursday">Thu</div>
+                <div class="day-btn" data-day="Friday">Fri</div>
+                <div class="day-btn" data-day="Saturday">Sat</div>
+                <div class="day-btn" data-day="Sunday">Sun</div>
+            </div>
+            
+            <!-- Specific Date Picker (hidden by default) -->
+            <div id="specificDateSelector" style="display:none;" class="date-picker-group">
+                <input type="date" id="specificDateInput">
+            </div>
+            
             <div class="custom-grid">
                 <div class="custom-field">
                     <label>🎯 PRIORITY</label>
@@ -423,10 +577,6 @@
                         <option value="High">High</option>
                         <option value="Critical">Critical</option>
                     </select>
-                </div>
-                <div class="custom-field">
-                    <label>📅 DUE DATE</label>
-                    <input type="date" id="dueDateInput">
                 </div>
             </div>
             <button class="add-btn" id="addExerciseBtn">+ Forge Exercise with Deadline</button>
@@ -454,10 +604,10 @@
                 <div class="setting-field">
                     <label>Default Punishment Style</label>
                     <select id="defaultPunishmentType">
-                        <option value="Physical">Physical</option>
-                        <option value="Financial">Financial</option>
-                        <option value="Social">Social</option>
-                        <option value="Food">Food</option>
+                        <option value="Physical">Physical (burpees/pushups)</option>
+                        <option value="Financial">Financial (donation/fine)</option>
+                        <option value="Social">Social (no social media)</option>
+                        <option value="Food">Food (no sweets/snacks)</option>
                     </select>
                 </div>
             </div>
@@ -509,7 +659,7 @@
             <button id="clearPunishBtn">✨ Clear Manually</button>
         </div>
     </div>
-    <div class="footer-note">📅 Tasks have due dates • Overdue = enhanced punishment • Export to backup</div>
+    <div class="footer-note">📅 Due: Weekly (Mon-Sun) or Specific Date • Overdue = Glowing punishment • White text for clarity</div>
 </div>
 
 <script>
@@ -520,6 +670,11 @@
     let defaultPriority = "Medium";
     let defaultPunishmentType = "Physical";
     let overdueMultiplier = 2;
+    
+    // Due type selection: 'weekly' or 'specific'
+    let currentDueType = 'weekly';
+    let selectedDay = 'Monday'; // default day
+    let specificDate = '';
 
     // DOM elements
     const incompleteContainer = document.getElementById('incompleteContainer');
@@ -529,7 +684,6 @@
     const addBtn = document.getElementById('addExerciseBtn');
     const exerciseNameInput = document.getElementById('exerciseName');
     const punishmentTextarea = document.getElementById('punishmentText');
-    const dueDateInput = document.getElementById('dueDateInput');
     const punishmentMessageDiv = document.getElementById('punishmentMessage');
     const forcePunishBtn = document.getElementById('forcePunishBtn');
     const clearPunishBtn = document.getElementById('clearPunishBtn');
@@ -541,21 +695,75 @@
     const importBtn = document.getElementById('importDataBtn');
     const importFileInput = document.getElementById('importFileInput');
     const hardResetBtn = document.getElementById('hardResetBtn');
+    const weeklySelector = document.getElementById('weeklySelector');
+    const specificDateSelector = document.getElementById('specificDateSelector');
+    const specificDateInput = document.getElementById('specificDateInput');
+    const dueTypeBtns = document.querySelectorAll('[data-due-type]');
+    const dayBtns = document.querySelectorAll('[data-day]');
     
     const mainTabs = document.querySelectorAll('[data-main-tab]');
     const exercisesTabDiv = document.getElementById('exercisesTab');
     const customizeTabDiv = document.getElementById('customizeTab');
     const completedTabDiv = document.getElementById('completedTab');
 
-    // Set default due date to tomorrow
-    function setDefaultDueDate() {
+    // Set default specific date to tomorrow
+    function setDefaultSpecificDate() {
         const tomorrow = new Date();
         tomorrow.setDate(tomorrow.getDate() + 1);
-        dueDateInput.value = tomorrow.toISOString().split('T')[0];
+        specificDateInput.value = tomorrow.toISOString().split('T')[0];
+        specificDate = specificDateInput.value;
     }
-    setDefaultDueDate();
+    setDefaultSpecificDate();
 
-    function generateDefaultPunishment(priority, type, isOverdue = false, multiplier = 1) {
+    // Get the next occurrence of a given day of week
+    function getNextDayOfWeek(dayName) {
+        const days = { 'Sunday': 0, 'Monday': 1, 'Tuesday': 2, 'Wednesday': 3, 'Thursday': 4, 'Friday': 5, 'Saturday': 6 };
+        const targetDay = days[dayName];
+        const today = new Date();
+        const currentDay = today.getDay();
+        let daysUntil = targetDay - currentDay;
+        if (daysUntil <= 0) daysUntil += 7;
+        const nextDate = new Date(today);
+        nextDate.setDate(today.getDate() + daysUntil);
+        return nextDate.toISOString().split('T')[0];
+    }
+
+    // Get display text for due date
+    function getDueDateDisplay(exercise) {
+        if (exercise.dueType === 'weekly') {
+            return `Every ${exercise.dueDay}`;
+        } else if (exercise.dueType === 'specific' && exercise.dueDate) {
+            return new Date(exercise.dueDate).toLocaleDateString();
+        }
+        return 'No due date';
+    }
+
+    // Check if exercise is overdue
+    function isOverdue(exercise) {
+        if (exercise.completed) return false;
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        if (exercise.dueType === 'weekly') {
+            const nextDue = new Date(getNextDayOfWeek(exercise.dueDay));
+            // If next due is today or in future, not overdue
+            // Check if we missed the last occurrence
+            const days = { 'Sunday': 0, 'Monday': 1, 'Tuesday': 2, 'Wednesday': 3, 'Thursday': 4, 'Friday': 5, 'Saturday': 6 };
+            const dueDayNum = days[exercise.dueDay];
+            const todayDayNum = today.getDay();
+            const lastDue = new Date(today);
+            lastDue.setDate(today.getDate() - ((todayDayNum - dueDayNum + 7) % 7 || 7));
+            lastDue.setHours(0, 0, 0, 0);
+            return lastDue < today;
+        } else if (exercise.dueType === 'specific' && exercise.dueDate) {
+            const due = new Date(exercise.dueDate);
+            due.setHours(0, 0, 0, 0);
+            return due < today;
+        }
+        return false;
+    }
+
+    function generateDefaultPunishment(priority, type, isOverdueTask = false, multiplier = 1) {
         const basePunishments = {
             Physical: { Low: "10 jumping jacks", Medium: "25 burpees", High: "50 push-ups", Critical: "100 burpees" },
             Financial: { Low: "$1 fine", Medium: "$5 donation", High: "$10 penalty", Critical: "$25 to charity" },
@@ -564,7 +772,7 @@
         };
         let punishment = basePunishments[type]?.[priority] || "25 burpees";
         
-        if (isOverdue && multiplier > 1) {
+        if (isOverdueTask && multiplier > 1) {
             if (type === "Physical") punishment = punishment.replace(/(\d+)/, m => Math.floor(parseInt(m) * multiplier));
             else if (type === "Financial") punishment = punishment.replace(/\$(\d+)/, (m, d) => `$${Math.floor(parseInt(d) * multiplier)}`);
             else punishment = `[OVERDUE] ${punishment} (${multiplier}x)`;
@@ -572,17 +780,8 @@
         return punishment;
     }
 
-    function isOverdue(dueDateStr) {
-        if (!dueDateStr) return false;
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        const due = new Date(dueDateStr);
-        due.setHours(0, 0, 0, 0);
-        return due < today;
-    }
-
     function getEffectivePunishment(exercise) {
-        const overdue = isOverdue(exercise.dueDate) && !exercise.completed;
+        const overdue = isOverdue(exercise);
         const multiplier = overdue ? overdueMultiplier : 1;
         if (exercise.punishment && exercise.punishment.trim()) {
             if (overdue && multiplier > 1) return `[OVERDUE] ${exercise.punishment} (${multiplier}x penalty)`;
@@ -592,14 +791,13 @@
     }
 
     function renderAllLists() {
-        const today = new Date().toISOString().split('T')[0];
         const incomplete = exercises.filter(ex => !ex.completed);
         const completed = exercises.filter(ex => ex.completed);
         
         const priorityOrder = { 'Critical': 0, 'High': 1, 'Medium': 2, 'Low': 3 };
         incomplete.sort((a,b) => {
-            const aOverdue = isOverdue(a.dueDate);
-            const bOverdue = isOverdue(b.dueDate);
+            const aOverdue = isOverdue(a);
+            const bOverdue = isOverdue(b);
             if (aOverdue && !bOverdue) return -1;
             if (!aOverdue && bOverdue) return 1;
             return priorityOrder[a.priority] - priorityOrder[b.priority];
@@ -619,11 +817,11 @@
 
     function renderExerciseCard(ex) {
         const checkedClass = ex.completed ? 'checked' : '';
-        const overdueClass = (!ex.completed && isOverdue(ex.dueDate)) ? 'overdue' : '';
+        const overdueClass = (!ex.completed && isOverdue(ex)) ? 'overdue' : '';
         const checkIcon = ex.completed ? '✓' : '○';
         const priorityIcon = { 'Low': '💚', 'Medium': '💛', 'High': '🧡', 'Critical': '❤️' }[ex.priority] || '💛';
-        const dueDateStr = ex.dueDate ? new Date(ex.dueDate).toLocaleDateString() : 'No due date';
-        const isTaskOverdue = !ex.completed && isOverdue(ex.dueDate);
+        const dueDisplay = getDueDateDisplay(ex);
+        const isTaskOverdue = !ex.completed && isOverdue(ex);
         const effectivePunishment = getEffectivePunishment(ex);
         
         return `
@@ -633,7 +831,7 @@
                     <div class="exercise-name">${priorityIcon} ${escapeHtml(ex.name)}</div>
                     <div class="meta-info">
                         <span>🎯 ${ex.priority}</span>
-                        <span class="due-date">📅 Due: ${dueDateStr}</span>
+                        <span class="due-date">📅 Due: ${dueDisplay}</span>
                         ${isTaskOverdue ? '<span class="overdue-badge">⚠️ OVERDUE</span>' : ''}
                     </div>
                     <div class="meta-info">⚡ Punishment: ${escapeHtml(effectivePunishment)}</div>
@@ -678,22 +876,37 @@
         const name = exerciseNameInput.value.trim();
         const customPunishment = punishmentTextarea.value.trim();
         const priority = exercisePrioritySelect.value;
-        const dueDate = dueDateInput.value;
 
         if (!name) { alert("Please enter an exercise name."); return; }
-        if (!dueDate) { alert("Please select a due date."); return; }
+        
+        let dueType = currentDueType;
+        let dueDay = null;
+        let dueDate = null;
+        
+        if (currentDueType === 'weekly') {
+            dueDay = selectedDay;
+            dueDate = getNextDayOfWeek(selectedDay);
+        } else {
+            dueDate = specificDateInput.value;
+            if (!dueDate) { alert("Please select a due date."); return; }
+        }
 
         const finalPunishment = customPunishment || generateDefaultPunishment(priority, defaultPunishmentType, false, 1);
         
         exercises.push({
             id: Date.now() + Math.random(),
-            name, punishment: finalPunishment, completed: false,
-            priority, dueDate, createdAt: new Date().toISOString()
+            name: name,
+            punishment: finalPunishment,
+            completed: false,
+            priority: priority,
+            dueType: dueType,
+            dueDay: dueDay,
+            dueDate: dueDate,
+            createdAt: new Date().toISOString()
         });
 
         exerciseNameInput.value = "";
         punishmentTextarea.value = "";
-        setDefaultDueDate();
         exercisePrioritySelect.value = defaultPriority;
         
         saveExercisesToLocal();
@@ -720,16 +933,17 @@
             return;
         }
         
-        const overdueTasks = incomplete.filter(ex => isOverdue(ex.dueDate));
+        const overdueTasks = incomplete.filter(ex => isOverdue(ex));
         let html = `<strong>⚠️ ${incomplete.length} incomplete task(s):</strong><br><br>`;
         incomplete.forEach(ex => {
-            const isOverdueTask = isOverdue(ex.dueDate);
+            const isOverdueTask = isOverdue(ex);
             const punish = getEffectivePunishment(ex);
-            html += `• ${escapeHtml(ex.name)} (Due: ${ex.dueDate || 'No date'})${isOverdueTask ? ' [OVERDUE]' : ''}<br>`;
-            html += `  <span style="color:#dd5555;">→ ${escapeHtml(punish)}</span><br>`;
+            const dueDisplay = getDueDateDisplay(ex);
+            html += `• ${escapeHtml(ex.name)} (Due: ${dueDisplay})${isOverdueTask ? ' [OVERDUE]' : ''}<br>`;
+            html += `  <span style="color:#ff8888; text-shadow:0 0 2px #ff0000;">→ ${escapeHtml(punish)}</span><br>`;
         });
         if (overdueTasks.length > 0) {
-            html += `<br><span style="color:#ff0000;">🔥 OVERDUE TASKS HAVE ENHANCED PUNISHMENTS (${overdueMultiplier}x) 🔥</span>`;
+            html += `<br><span style="color:#ff4444; text-shadow:0 0 5px #ff0000;">🔥 OVERDUE TASKS HAVE ENHANCED PUNISHMENTS (${overdueMultiplier}x) 🔥</span>`;
         }
         punishmentMessageDiv.innerHTML = html;
     }
@@ -771,8 +985,40 @@
         if (tabId === 'complete') renderAllLists();
     }
 
+    // Due type switching UI
+    function switchDueType(type) {
+        currentDueType = type;
+        dueTypeBtns.forEach(btn => {
+            if (btn.getAttribute('data-due-type') === type) {
+                btn.classList.add('active-due');
+            } else {
+                btn.classList.remove('active-due');
+            }
+        });
+        
+        if (type === 'weekly') {
+            weeklySelector.style.display = 'grid';
+            specificDateSelector.style.display = 'none';
+        } else {
+            weeklySelector.style.display = 'none';
+            specificDateSelector.style.display = 'block';
+        }
+    }
+
+    // Day selection
+    function selectDay(day) {
+        selectedDay = day;
+        dayBtns.forEach(btn => {
+            if (btn.getAttribute('data-day') === day) {
+                btn.classList.add('selected-day');
+            } else {
+                btn.classList.remove('selected-day');
+            }
+        });
+    }
+
     function exportData() {
-        const data = { exercises, settings: { defaultPriority, defaultPunishmentType, overdueMultiplier }, version: "2.0" };
+        const data = { exercises, settings: { defaultPriority, defaultPunishmentType, overdueMultiplier }, version: "3.0" };
         const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -829,20 +1075,20 @@
     }
 
     function saveExercisesToLocal() {
-        localStorage.setItem("discipline_exercises_v2", JSON.stringify(exercises));
-        localStorage.setItem("discipline_date_v2", currentDate);
+        localStorage.setItem("discipline_exercises_v3", JSON.stringify(exercises));
+        localStorage.setItem("discipline_date_v3", currentDate);
     }
 
     function savePunishmentFlag() {
-        localStorage.setItem("discipline_punishment_v2", JSON.stringify(punishmentActive));
+        localStorage.setItem("discipline_punishment_v3", JSON.stringify(punishmentActive));
     }
 
     function saveSettings() {
-        localStorage.setItem("discipline_settings_v2", JSON.stringify({ defaultPriority, defaultPunishmentType, overdueMultiplier }));
+        localStorage.setItem("discipline_settings_v3", JSON.stringify({ defaultPriority, defaultPunishmentType, overdueMultiplier }));
     }
 
     function loadSettings() {
-        const saved = localStorage.getItem("discipline_settings_v2");
+        const saved = localStorage.getItem("discipline_settings_v3");
         if (saved) {
             try {
                 const settings = JSON.parse(saved);
@@ -858,11 +1104,11 @@
     }
 
     function loadData() {
-        const savedDate = localStorage.getItem("discipline_date_v2");
+        const savedDate = localStorage.getItem("discipline_date_v3");
         const todayStr = new Date().toLocaleDateString('en-CA');
         
         if (savedDate !== todayStr) {
-            const savedExercisesRaw = localStorage.getItem("discipline_exercises_v2");
+            const savedExercisesRaw = localStorage.getItem("discipline_exercises_v3");
             if (savedExercisesRaw) {
                 try {
                     const parsed = JSON.parse(savedExercisesRaw);
@@ -873,9 +1119,9 @@
             currentDate = todayStr;
             saveExercisesToLocal();
         } else {
-            const stored = localStorage.getItem("discipline_exercises_v2");
+            const stored = localStorage.getItem("discipline_exercises_v3");
             exercises = stored ? (JSON.parse(stored) || []) : [];
-            const storedPunishment = localStorage.getItem("discipline_punishment_v2");
+            const storedPunishment = localStorage.getItem("discipline_punishment_v3");
             punishmentActive = storedPunishment ? JSON.parse(storedPunishment) : (exercises.some(ex => !ex.completed));
         }
         renderAllLists();
@@ -902,10 +1148,24 @@
     hardResetBtn.addEventListener('click', hardReset);
     mainTabs.forEach(tab => tab.addEventListener('click', () => switchMainTab(tab.getAttribute('data-main-tab'))));
     exerciseNameInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') addNewExercise(); });
+    
+    dueTypeBtns.forEach(btn => {
+        btn.addEventListener('click', () => switchDueType(btn.getAttribute('data-due-type')));
+    });
+    
+    dayBtns.forEach(btn => {
+        btn.addEventListener('click', () => selectDay(btn.getAttribute('data-day')));
+    });
+    
+    specificDateInput.addEventListener('change', (e) => { specificDate = e.target.value; });
 
+    // Initialize
     loadSettings();
     loadData();
     switchMainTab("exercises");
+    switchDueType('weekly');
+    selectDay('Monday');
+    setDefaultSpecificDate();
 </script>
 </body>
 </html>
